@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hizmetlerimiz | RE/MAX Prime</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --remax-red: #dc2626; --remax-blue: #002b49; --dark: #1f2937; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        body { background:#f8fafc; color:var(--dark); }
+
+        header { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.08); position:sticky; top:0; z-index:1000; }
+        .navbar { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1rem; position:relative; }
+        .logo-text { font-size:1.5rem; font-weight:800; color:var(--remax-red); }
+        .logo-sub { font-size:1.2rem; font-weight:300; color:var(--remax-blue); }
+        .nav-menu { display:flex; list-style:none; gap:1.5rem; }
+        .nav-menu a { text-decoration:none; color:var(--dark); font-weight:600; font-size:0.9rem; }
+        .nav-menu a:hover, .nav-menu a.active { color:var(--remax-red); }
+        .menu-toggle { display:none; font-size:1.5rem; color:var(--remax-blue); cursor:pointer; }
+
+        .prime-banner { max-width:1100px; margin:1.5rem auto 1rem; background:linear-gradient(135deg, #002b49 0%, #00406c 100%); border-left:5px solid var(--remax-red); border-radius:8px; padding:1.2rem 1.5rem; color:#fff; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 15px rgba(0,43,73,0.12); }
+        .prime-banner-text h2 { font-size:1.2rem; font-weight:700; margin-bottom:0.2rem; }
+        .prime-banner-text p { font-size:0.85rem; color:#cbd5e1; font-weight:300; }
+        .prime-badge { background:rgba(220,38,38,0.15); border:1px solid rgba(220,38,38,0.4); color:#fca5a5; padding:0.4rem 0.8rem; border-radius:20px; font-size:0.8rem; font-weight:600; display:flex; align-items:center; gap:0.4rem; }
+
+        .container { max-width:1100px; margin:0 auto; padding:0 1rem 2.5rem; }
+        .services-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2rem; }
+        
+        .service-card { background:#fff; border-radius:8px; padding:1.2rem; border:1px solid #e2e8f0; box-shadow:0 4px 12px rgba(0,0,0,0.04); }
+        .service-icon { font-size:1.8rem; color:var(--remax-red); margin-bottom:0.6rem; }
+        .service-card h3 { color:var(--remax-blue); margin-bottom:0.4rem; font-size:1rem; font-weight:700; }
+        .service-card p { color:#64748b; font-size:0.85rem; margin-bottom:1rem; line-height:1.4; }
+        .btn-detail { background:var(--remax-blue); color:#fff; padding:0.55rem 1rem; border-radius:5px; font-weight:600; font-size:0.82rem; border:none; cursor:pointer; width:100%; text-align:center; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display:block; }
+            .nav-menu { display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%; background:#fff; padding:1rem; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+            .nav-menu.active { display:flex; }
+            .prime-banner { flex-direction:column; text-align:center; gap:0.8rem; margin:1rem; }
+            .services-grid { grid-template-columns:1fr; }
+        }
+
+        footer { background:var(--remax-blue); color:#fff; text-align:center; padding:1.2rem 0; margin-top:2.5rem; font-size:0.85rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container"><span class="logo-text">RE/MAX</span> <span class="logo-sub">PRIME</span></div>
+            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="kurumsal.html">Kurumsal & Ofisimiz</a></li>
+                <li><a href="hizmetler.html" class="active">Hizmetlerimiz</a></li>
+                <li><a href="ilanlar.html">Portföy / İlanlar</a></li>
+                <li><a href="danismanlar.html">Danışmanlarımız</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="prime-banner">
+        <div class="prime-banner-text">
+            <h2>A'dan Z'ye Profesyonel Danışmanlık</h2>
+            <p>RE/MAX Prime ile mülkünüzün değerleme, pazarlama ve hukuki süreçlerinde tam destek</p>
+        </div>
+        <div class="prime-badge"><i class="fas fa-concierge-bell"></i> Hizmetlerimiz</div>
+    </div>
+
+    <main class="container">
+        <div class="services-grid">
+            <div class="service-card"><i class="fas fa-calculator service-icon"></i><h3>Ücretsiz Gayrimenkul Ekspertiz & Değerleme</h3><p>Bölgesel pazar verileri ve emsal satış analizleriyle mülkünüzün gerçek piyasa değerini tespit ediyoruz.</p><button class="btn-detail" onclick="alert('Talebiniz alınmıştır.')">Hizmet Talebi Oluştur</button></div>
+            <div class="service-card"><i class="fas fa-home service-icon"></i><h3>Lüks Konut & Mülk Satış / Kiralama</h3><p>Villa, rezidans, yalı ve çatı dubleksi gibi nitelikli portföylere özel butik pazarlama stratejileri uyguluyoruz.</p><button class="btn-detail" onclick="alert('Talebiniz alınmıştır.')">Hizmet Talebi Oluştur</button></div>
+            <div class="service-card"><i class="fas fa-building service-icon"></i><h3>Ticari Gayrimenkul & Yatırım Danışmanlığı</h3><p>Plaza katları, dükkanlar, fabrikalar ve yüksek kira getirili ticari taşınmazlar için yatırım odaklı çözümler.</p><button class="btn-detail" onclick="alert('Talebiniz alınmıştır.')">Hizmet Talebi Oluştur</button></div>
+            <div class="service-card"><i class="fas fa-balance-scale service-icon"></i><h3>Hukuki, Tapu & Kredi Süreç Yönetimi</h3><p>Belediye, tapu dairesi, ipotek ve banka kredi işlemlerinizi baştan sona pürüzsüz yürütüyoruz.</p><button class="btn-detail" onclick="alert('Talebiniz alınmıştır.')">Hizmet Talebi Oluştur</button></div>
+            <div class="service-card"><i class="fas fa-bullhorn service-icon"></i><h3>Maksimum İlan Görünürlüğü & Dijital Pazarlama</h3><p>İlanlarınızı Google & Meta sponsorlu reklamlarla hedefli kitlelere ve RE/MAX global ağına ulaştırıyoruz.</p><button class="btn-detail" onclick="alert('Talebiniz alınmıştır.')">Hizmet Talebi Oluştur</button></div>
+            <div class="service-card"><i class="fas fa-passport service-icon"></i><h3>Yabancı Yatırımcı & Vatandaşlık Danışmanlığı</h3><p>Yatırım yoluyla Türk vatandaşlığı ve ikamet izni süreçlerinde A'dan Z'ye profesyonel danışmanlık sağlıyoruz.</p><button class="btn-detail" onclick="alert('Talebiniz alınmıştır.')">Hizmet Talebi Oluştur</button></div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+    </script>
+    <footer>&copy; 2026 RE/MAX Prime. Tüm Hakları Saklıdır.</footer>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | RE/MAX Prime</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --remax-red: #dc2626; --remax-blue: #002b49; --dark: #1f2937; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        body { background:#f8fafc; color:var(--dark); }
+
+        header { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.08); position:sticky; top:0; z-index:1000; }
+        .navbar { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1rem; position:relative; }
+        .logo-text { font-size:1.5rem; font-weight:800; color:var(--remax-red); }
+        .logo-sub { font-size:1.2rem; font-weight:300; color:var(--remax-blue); }
+        .nav-menu { display:flex; list-style:none; gap:1.5rem; }
+        .nav-menu a { text-decoration:none; color:var(--dark); font-weight:600; font-size:0.9rem; }
+        .nav-menu a:hover, .nav-menu a.active { color:var(--remax-red); }
+        .menu-toggle { display:none; font-size:1.5rem; color:var(--remax-blue); cursor:pointer; }
+
+        .prime-banner { max-width:1100px; margin:1.5rem auto 1rem; background:linear-gradient(135deg, #002b49 0%, #00406c 100%); border-left:5px solid var(--remax-red); border-radius:8px; padding:1.2rem 1.5rem; color:#fff; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 15px rgba(0,43,73,0.12); }
+        .prime-banner-text h2 { font-size:1.2rem; font-weight:700; margin-bottom:0.2rem; }
+        .prime-banner-text p { font-size:0.85rem; color:#cbd5e1; font-weight:300; }
+        .prime-badge { background:rgba(220,38,38,0.15); border:1px solid rgba(220,38,38,0.4); color:#fca5a5; padding:0.4rem 0.8rem; border-radius:20px; font-size:0.8rem; font-weight:600; display:flex; align-items:center; gap:0.4rem; }
+
+        .container { max-width:1100px; margin:0 auto; padding:0 1rem 2.5rem; }
+        .contact-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem; }
+        .info-box { background:#fff; padding:1.5rem; border-radius:10px; border:1px solid #e2e8f0; }
+        .info-item { margin-bottom:1rem; display:flex; gap:0.8rem; align-items:flex-start; font-size:0.88rem; }
+        .info-item i { color:var(--remax-red); font-size:1.1rem; margin-top:0.2rem; }
+
+        .map-box { position:relative; border-radius:10px; overflow:hidden; border:1px solid #e2e8f0; min-height:300px; }
+        .btn-nav { display:inline-block; margin-top:1rem; background:#16a34a; color:#fff; padding:0.7rem 1.2rem; border-radius:5px; text-decoration:none; font-weight:bold; font-size:0.85rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display:block; }
+            .nav-menu { display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%; background:#fff; padding:1rem; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+            .nav-menu.active { display:flex; }
+            .prime-banner { flex-direction:column; text-align:center; gap:0.8rem; margin:1rem; }
+            .contact-grid { grid-template-columns:1fr; }
+        }
+
+        footer { background:var(--remax-blue); color:#fff; text-align:center; padding:1.2rem 0; margin-top:2.5rem; font-size:0.85rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container"><span class="logo-text">RE/MAX</span> <span class="logo-sub">PRIME</span></div>
+            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="kurumsal.html">Kurumsal & Ofisimiz</a></li>
+                <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+                <li><a href="ilanlar.html">Portföy / İlanlar</a></li>
+                <li><a href="danismanlar.html">Danışmanlarımız</a></li>
+                <li><a href="iletisim.html" class="active">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="prime-banner">
+        <div class="prime-banner-text">
+            <h2>İletişim & Ofis Konumumuz</h2>
+            <p>Bostancı ofisimizi ziyaret edebilir veya doğrudan iletişime geçebilirsiniz</p>
+        </div>
+        <div class="prime-badge"><i class="fas fa-map-marker-alt"></i> Bize Ulaşın</div>
+    </div>
+
+    <main class="container">
+        <div class="contact-grid">
+            <div class="info-box">
+                <h2 style="color:var(--remax-blue); margin-bottom:1rem; font-size:1.2rem;">Adres & İletişim Bilgileri</h2>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div><strong>Açık Adres:</strong><br>Bostancı Mah. Tarıkı Has Sk. Tavukçuoğlu İş Merkezi No: 2 İç Kapı No: 7 34744 Bostancı, Kadıköy / İstanbul</div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div><strong>Telefon:</strong><br><a href="tel:02163727372" style="color:var(--dark); text-decoration:none;">0216 372 73 72</a></div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div><strong>E-Posta:</strong><br><a href="mailto:info@remaxprime.com.tr" style="color:var(--dark); text-decoration:none;">info@remaxprime.com.tr</a></div>
+                </div>
+                <a href="https://maps.google.com" target="_blank" class="btn-nav"><i class="fas fa-directions"></i> Google Maps Yol Tarifi Al</a>
+            </div>
+
+            <div class="map-box">
+                <iframe width="100%" height="100%" style="min-height:300px; border:0;" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Bostanc%C4%B1%20Tavuk%C3%A7uo%C4%9Flu%20%C4%B0%C5%9F%20Merkezi&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+    </script>
+    <footer>&copy; 2026 RE/MAX Prime. Tüm Hakları Saklıdır.</footer>
+</body>
+</html>

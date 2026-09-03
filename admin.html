@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli | RE/MAX Prime</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root { --remax-red: #dc2626; --remax-blue: #002b49; --dark: #1f2937; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+        body { background:#f1f5f9; color:var(--dark); }
+
+        .login-box { max-width:400px; margin:100px auto; background:#fff; padding:2rem; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1); text-align:center; }
+        .login-box h2 { color:var(--remax-blue); margin-bottom:1rem; }
+        .login-box input { width:100%; padding:0.8rem; margin:1rem 0; border:1px solid #cbd5e1; border-radius:6px; text-align:center; font-size:1.1rem; }
+        .login-box button { width:100%; background:var(--remax-red); color:#fff; padding:0.8rem; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:1rem; }
+
+        .dashboard { display:none; max-width:1000px; margin:40px auto; background:#fff; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden; }
+        .dash-header { background:var(--remax-blue); color:#fff; padding:1.2rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+        
+        .dash-nav { display:flex; background:#e2e8f0; border-bottom:1px solid #cbd5e1; }
+        .dash-nav button { flex:1; padding:1rem; border:none; background:none; font-weight:bold; color:var(--dark); cursor:pointer; }
+        .dash-nav button.active { background:#fff; color:var(--remax-red); border-bottom:3px solid var(--remax-red); }
+
+        .dash-content { padding:2rem; }
+        .tab-pane { display:none; }
+        .tab-pane.active { display:block; }
+
+        .form-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.2rem; }
+        .form-group { margin-bottom:1rem; }
+        .form-group.full { grid-column:1 / -1; }
+        .form-group label { display:block; margin-bottom:0.4rem; font-weight:600; font-size:0.88rem; }
+        .form-group input, .form-group select { width:100%; padding:0.7rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.9rem; }
+
+        .file-upload-box { border:2px dashed #cbd5e1; padding:1.5rem; text-align:center; border-radius:8px; background:#f8fafc; cursor:pointer; }
+        .file-upload-box input[type="file"] { display:none; }
+        .file-upload-box i { font-size:2rem; color:var(--remax-red); margin-bottom:0.5rem; }
+
+        .btn-submit { background:var(--remax-red); color:#fff; padding:0.8rem 2rem; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:1rem; width:100%; margin-top:1rem; }
+        .btn-logout { background:rgba(255,255,255,0.2); color:#fff; padding:0.4rem 0.8rem; border:none; border-radius:4px; cursor:pointer; font-size:0.85rem; }
+
+        .item-list { margin-top:2rem; border-top:2px solid #e2e8f0; padding-top:1.5rem; }
+        .list-row { display:flex; justify-content:space-between; align-items:center; padding:0.8rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; margin-bottom:0.5rem; }
+        .btn-group { display:flex; gap:0.5rem; }
+        .btn-edit { background:#2563eb; color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.85rem; }
+        .btn-delete { background:#ef4444; color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.85rem; }
+        .img-preview { width:50px; height:50px; object-fit:cover; border-radius:4px; margin-right:1rem; }
+    </style>
+</head>
+<body>
+
+    <div class="login-box" id="loginBox">
+        <h2>RE/MAX Prime Panel</h2>
+        <p style="font-size:0.85rem; color:#64748b; margin-bottom:1rem;">Giriş Şifresi: <strong>1234</strong></p>
+        <input type="password" id="passInput" placeholder="Şifre Giriniz" onkeydown="if(event.key==='Enter') checkPass()">
+        <button type="button" onclick="checkPass()">Giriş Yap</button>
+    </div>
+
+    <div class="dashboard" id="dashBox">
+        <div class="dash-header">
+            <h3>RE/MAX Prime Site Yönetimi</h3>
+            <button class="btn-logout" onclick="location.reload()">Çıkış Yap</button>
+        </div>
+
+        <div class="dash-nav">
+            <button id="btnTab1" class="active" onclick="switchTab('ilanTab', this)">Portföy & İlan Yönetimi</button>
+            <button id="btnTab2" onclick="switchTab('danismanTab', this)">Danışman Kadrosu Yönetimi</button>
+        </div>
+
+        <div class="dash-content">
+            
+            <!-- İlan Sekmesi -->
+            <div class="tab-pane active" id="ilanTab">
+                <h4 id="propFormTitle" style="margin-bottom:1.2rem; color:var(--remax-blue);">Yeni İlan Ekle</h4>
+                <form id="propForm" onsubmit="saveProperty(event)">
+                    <input type="hidden" id="pEditId" value="">
+                    <div class="form-grid">
+                        <div class="form-group full">
+                            <label>İlan Başlığı</label>
+                            <input type="text" id="pTitle" placeholder="Örn: Bostancı Sahilde Lüks 3+1 Daire" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mülk Kategorisi</label>
+                            <select id="pCategory">
+                                <option value="Konut">Konut (Daire, Villa)</option>
+                                <option value="Ticari">Ticari (Ofis, Dükkan, Plaza)</option>
+                                <option value="Arsa">Arsa & Arazi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>İşlem Tipi</label>
+                            <select id="pType">
+                                <option value="Satılık">Satılık</option>
+                                <option value="Kiralık">Kiralık</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Fiyat</label>
+                            <input type="text" id="pPrice" placeholder="Örn: ₺ 14.500.000" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Konum / Semt</label>
+                            <input type="text" id="pLocation" placeholder="Örn: Bostancı, Kadıköy" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Oda Sayısı</label>
+                            <select id="pRooms">
+                                <option value="1+0 (Stüdyo)">1+0 (Stüdyo)</option>
+                                <option value="1+1">1+1</option>
+                                <option value="2+1">2+1</option>
+                                <option value="3+1" selected>3+1</option>
+                                <option value="4+1">4+1</option>
+                                <option value="4+2 / 5+1">4+2 / 5+1</option>
+                                <option value="Müstakil / Villa">Müstakil / Villa</option>
+                                <option value="Plaza / İş Yeri">Plaza / İş Yeri</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Metrekare (m²)</label>
+                            <input type="text" id="pArea" placeholder="Örn: 165 m²">
+                        </div>
+                        
+                        <div class="form-group full">
+                            <label>İlan Fotoğrafları Seç (Değiştirmek istemiyorsanız boş bırakın)</label>
+                            <div class="file-upload-box" onclick="document.getElementById('pImgFiles').click()">
+                                <i class="fas fa-images"></i>
+                                <p id="pImgLabel">Fotoğraf Seçmek İçin Tıklayın</p>
+                                <input type="file" id="pImgFiles" accept="image/*" multiple onchange="processMultipleImages(this, 'pImgLabel')">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" id="pBtnSubmit" class="btn-submit">İlanı Kaydet ve Yayınla</button>
+                </form>
+
+                <div class="item-list">
+                    <h4>Eklenen İlanlar</h4>
+                    <div id="propertyList"></div>
+                </div>
+            </div>
+
+            <!-- Danışman Sekmesi -->
+            <div class="tab-pane" id="danismanTab">
+                <h4 id="agentFormTitle" style="margin-bottom:1.2rem; color:var(--remax-blue);">Yeni Danışman Ekle</h4>
+                <form id="agentForm" onsubmit="saveAgent(event)">
+                    <input type="hidden" id="aEditId" value="">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Danışman Ad Soyad</label>
+                            <input type="text" id="aName" placeholder="Örn: Kaan Kısa" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unvan / Uzmanlık</label>
+                            <input type="text" id="aTitle" placeholder="Örn: Lüks Konut Uzmanı" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon Numarası</label>
+                            <input type="tel" id="aPhone" placeholder="05XX XXX XX XX" required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-Posta Adresi</label>
+                            <input type="email" id="aEmail" placeholder="danisman@remaxprime.com.tr">
+                        </div>
+
+                        <div class="form-group full">
+                            <label>Danışman Profil Fotoğrafı (Değiştirmek istemiyorsanız boş bırakın)</label>
+                            <div class="file-upload-box" onclick="document.getElementById('aImgFile').click()">
+                                <i class="fas fa-user-circle"></i>
+                                <p id="aImgLabel">Fotoğraf Seçmek İçin Tıklayın</p>
+                                <input type="file" id="aImgFile" accept="image/*" onchange="processSingleAgentImage(this, 'aImgLabel')">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" id="aBtnSubmit" class="btn-submit">Danışmanı Ekip Listesine Ekle</button>
+                </form>
+
+                <div class="item-list">
+                    <h4>Eklenen Danışman Kadrosu</h4>
+                    <div id="agentList"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        var propImagesArray = [];
+        var agentBase64 = "";
+
+        function checkPass() {
+            var val = document.getElementById('passInput').value;
+            if(val === '1234') {
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('dashBox').style.display = 'block';
+                loadData();
+            } else { alert('Hatalı şifre!'); }
+        }
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-pane').forEach(function(el) { el.classList.remove('active'); });
+            document.querySelectorAll('.dash-nav button').forEach(function(el) { el.classList.remove('active'); });
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function processMultipleImages(input, labelId) {
+            var files = input.files;
+            if (files.length > 0) {
+                propImagesArray = [];
+                document.getElementById(labelId).innerText = files.length + " Adet Fotoğraf İşleniyor...";
+                var loadedCount = 0;
+                for (var i = 0; i < files.length; i++) {
+                    (function(file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var img = new Image();
+                            img.onload = function() {
+                                var canvas = document.createElement('canvas');
+                                var max_size = 800;
+                                var width = img.width, height = img.height;
+                                if (width > height) { if (width > max_size) { height *= max_size / width; width = max_size; } }
+                                else { if (height > max_size) { width *= max_size / height; height = max_size; } }
+                                canvas.width = width; canvas.height = height;
+                                var ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
+                                propImagesArray.push(canvas.toDataURL('image/jpeg', 0.7));
+                                loadedCount++;
+                                if (loadedCount === files.length) {
+                                    document.getElementById(labelId).innerText = files.length + " Adet Fotoğraf Yüklendi (Hazır)";
+                                }
+                            };
+                            img.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    })(files[i]);
+                }
+            }
+        }
+
+        function processSingleAgentImage(input, labelId) {
+            var file = input.files[0];
+            if (file) {
+                document.getElementById(labelId).innerText = "İşleniyor: " + file.name;
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        var max_size = 600;
+                        var width = img.width, height = img.height;
+                        if (width > height) { if (width > max_size) { height *= max_size / width; width = max_size; } }
+                        else { if (height > max_size) { width *= max_size / height; height = max_size; } }
+                        canvas.width = width; canvas.height = height;
+                        var ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
+                        agentBase64 = canvas.toDataURL('image/jpeg', 0.85);
+                        document.getElementById(labelId).innerText = "Seçildi: " + file.name;
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveProperty(e) {
+            e.preventDefault();
+            var properties = JSON.parse(localStorage.getItem('remax_properties')) || [];
+            var editId = document.getElementById('pEditId').value;
+
+            if (editId) {
+                properties = properties.map(function(p) {
+                    if (p.id == editId) {
+                        p.title = document.getElementById('pTitle').value;
+                        p.category = document.getElementById('pCategory').value;
+                        p.type = document.getElementById('pType').value;
+                        p.price = document.getElementById('pPrice').value;
+                        p.location = document.getElementById('pLocation').value;
+                        p.rooms = document.getElementById('pRooms').value;
+                        p.area = document.getElementById('pArea').value;
+                        if (propImagesArray.length > 0) {
+                            p.images = propImagesArray;
+                            p.image = propImagesArray[0];
+                        }
+                    }
+                    return p;
+                });
+                alert('İlan başarıyla güncellendi!');
+            } else {
+                properties.push({
+                    id: Date.now(),
+                    title: document.getElementById('pTitle').value,
+                    category: document.getElementById('pCategory').value,
+                    type: document.getElementById('pType').value,
+                    price: document.getElementById('pPrice').value,
+                    location: document.getElementById('pLocation').value,
+                    rooms: document.getElementById('pRooms').value,
+                    area: document.getElementById('pArea').value,
+                    images: propImagesArray.length > 0 ? propImagesArray : ['https://via.placeholder.com/400x300?text=Fotograf+Yok'],
+                    image: propImagesArray.length > 0 ? propImagesArray[0] : 'https://via.placeholder.com/400x300?text=Fotograf+Yok'
+                });
+                alert('Yeni ilan yüklendi!');
+            }
+
+            localStorage.setItem('remax_properties', JSON.stringify(properties));
+            resetPropForm();
+            loadData();
+        }
+
+        function editProperty(id) {
+            var properties = JSON.parse(localStorage.getItem('remax_properties')) || [];
+            var p = properties.find(function(item) { return item.id == id; });
+            if (p) {
+                document.getElementById('pEditId').value = p.id;
+                document.getElementById('pTitle').value = p.title;
+                document.getElementById('pCategory').value = p.category || 'Konut';
+                document.getElementById('pType').value = p.type;
+                document.getElementById('pPrice').value = p.price;
+                document.getElementById('pLocation').value = p.location;
+                document.getElementById('pRooms').value = p.rooms || '3+1';
+                document.getElementById('pArea').value = p.area || '';
+                
+                document.getElementById('propFormTitle').innerText = "İlanı Güncelle (ID: " + p.id + ")";
+                document.getElementById('pBtnSubmit').innerText = "Değişiklikleri Kaydet";
+                document.getElementById('pImgLabel').innerText = "Mevcut fotoğraflar korunuyor. Değiştirmek için yeni seçin.";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function resetPropForm() {
+            propImagesArray = [];
+            document.getElementById('pEditId').value = "";
+            document.getElementById('propForm').reset();
+            document.getElementById('propFormTitle').innerText = "Yeni İlan Ekle";
+            document.getElementById('pBtnSubmit').innerText = "İlanı Kaydet ve Yayınla";
+            document.getElementById('pImgLabel').innerText = "Fotoğraf Seçmek İçin Tıklayın";
+        }
+
+        function saveAgent(e) {
+            e.preventDefault();
+            var agents = JSON.parse(localStorage.getItem('remax_agents')) || [];
+            var editId = document.getElementById('aEditId').value;
+
+            if (editId) {
+                agents = agents.map(function(a) {
+                    if (a.id == editId) {
+                        a.name = document.getElementById('aName').value;
+                        a.title = document.getElementById('aTitle').value;
+                        a.phone = document.getElementById('aPhone').value;
+                        a.email = document.getElementById('aEmail').value;
+                        if (agentBase64) a.image = agentBase64;
+                    }
+                    return a;
+                });
+                alert('Danışman bilgileri güncellendi!');
+            } else {
+                agents.push({
+                    id: Date.now(),
+                    name: document.getElementById('aName').value,
+                    title: document.getElementById('aTitle').value,
+                    phone: document.getElementById('aPhone').value,
+                    email: document.getElementById('aEmail').value,
+                    image: agentBase64 || 'https://via.placeholder.com/200x200?text=Profil'
+                });
+                alert('Danışman eklendi!');
+            }
+
+            localStorage.setItem('remax_agents', JSON.stringify(agents));
+            resetAgentForm();
+            loadData();
+        }
+
+        function editAgent(id) {
+            var agents = JSON.parse(localStorage.getItem('remax_agents')) || [];
+            var a = agents.find(function(item) { return item.id == id; });
+            if (a) {
+                document.getElementById('aEditId').value = a.id;
+                document.getElementById('aName').value = a.name;
+                document.getElementById('aTitle').value = a.title;
+                document.getElementById('aPhone').value = a.phone;
+                document.getElementById('aEmail').value = a.email || '';
+                
+                document.getElementById('agentFormTitle').innerText = "Danışmanı Güncelle: " + a.name;
+                document.getElementById('aBtnSubmit').innerText = "Güncellemeleri Kaydet";
+                document.getElementById('aImgLabel').innerText = "Mevcut fotoğraf korunuyor. Değiştirmek için yeni seçin.";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function resetAgentForm() {
+            agentBase64 = "";
+            document.getElementById('aEditId').value = "";
+            document.getElementById('agentForm').reset();
+            document.getElementById('agentFormTitle').innerText = "Yeni Danışman Ekle";
+            document.getElementById('aBtnSubmit').innerText = "Danışmanı Ekip Listesine Ekle";
+            document.getElementById('aImgLabel').innerText = "Fotoğraf Seçmek İçin Tıklayın";
+        }
+
+        function deleteItem(type, id) {
+            var key = type === 'prop' ? 'remax_properties' : 'remax_agents';
+            var data = JSON.parse(localStorage.getItem(key)) || [];
+            data = data.filter(function(item) { return item.id != id; });
+            localStorage.setItem(key, JSON.stringify(data));
+            loadData();
+        }
+
+        function loadData() {
+            var properties = JSON.parse(localStorage.getItem('remax_properties')) || [];
+            var agents = JSON.parse(localStorage.getItem('remax_agents')) || [];
+
+            var propHtml = '';
+            if(properties.length > 0) {
+                properties.forEach(function(p) {
+                    var imgCount = p.images ? p.images.length : 1;
+                    propHtml += '<div class="list-row"><div style="display:flex; align-items:center;"><img src="' + p.image + '" class="img-preview"><span><strong>' + p.title + '</strong> - ' + p.price + ' (' + p.rooms + ')</span></div><div class="btn-group"><button class="btn-edit" onclick="editProperty(' + p.id + ')">Güncelle</button><button class="btn-delete" onclick="deleteItem(\'prop\', ' + p.id + ')">Sil</button></div></div>';
+                });
+            } else {
+                propHtml = '<p style="color:#94a3b8; font-size:0.9rem;">Henüz ilan eklenmedi.</p>';
+            }
+            document.getElementById('propertyList').innerHTML = propHtml;
+
+            var agentHtml = '';
+            if(agents.length > 0) {
+                agents.forEach(function(a) {
+                    agentHtml += '<div class="list-row"><div style="display:flex; align-items:center;"><img src="' + a.image + '" class="img-preview" style="border-radius:6px;"><span><strong>' + a.name + '</strong> - ' + a.title + '</span></div><div class="btn-group"><button class="btn-edit" onclick="editAgent(' + a.id + ')">Güncelle</button><button class="btn-delete" onclick="deleteItem(\'agent\', ' + a.id + ')">Sil</button></div></div>';
+                });
+            } else {
+                agentHtml = '<p style="color:#94a3b8; font-size:0.9rem;">Henüz danışman eklenmedi.</p>';
+            }
+            document.getElementById('agentList').innerHTML = agentHtml;
+        }
+    </script>
+</body>
+</html>
