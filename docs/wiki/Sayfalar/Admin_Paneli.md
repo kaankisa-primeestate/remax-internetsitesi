@@ -1,5 +1,9 @@
 # Yönetim Paneli (`admin.html`)
 
+> **Özet:** [[Ilanlar]] ve [[Danismanlar]] sayfalarında gösterilecek içeriği düzenlemek için kullanılan, navbar'da linklenmeyen, düz metin şifreyle "korunan" bağımsız bir CRUD panelidir. Veriyi doğrudan tarayıcının `localStorage`'ına yazar; gerçek bir backend/oturum mekanizması yoktur.
+> **Kütüphaneler:** HTML5 (`<form>`, `FileReader`, `<canvas>`), Vanilla JavaScript, Font Awesome 6.
+> **Bağlantılar:** [[Admin_Form]], [[LocalStorage_Semasi]], [[Ilanlar]], [[Danismanlar]], [[Guvenlik_Notlari]]
+
 Bkz. [[Home]], [[Mimari]], [[LocalStorage_Semasi]], [[Guvenlik_Notlari]].
 
 ## Amaç

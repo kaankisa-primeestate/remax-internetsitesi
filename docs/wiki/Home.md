@@ -1,5 +1,9 @@
 # RE/MAX Prime İnternet Sitesi — Wiki
 
+> **Özet:** Bu sayfa, RE/MAX Prime tanıtım/portföy sitesinin tüm wiki dokümantasyonuna giriş noktasıdır ve site haritası, mimari, tasarım sistemi ile veri modeli notlarını tek yerden birbirine bağlar. Depo, framework veya backend içermeyen, saf statik HTML/CSS/JS sayfalarından oluşur.
+> **Kütüphaneler:** HTML5, CSS3, Vanilla JavaScript, Font Awesome 6 (CDN).
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]], [[Modal]], [[Admin_Form]]
+
 Bu wiki, `remax-internetsitesi` deposunun analizinden otomatik olarak
 üretilmiştir. Amaç, kod tabanının mimarisini, sayfa yapısını, veri akışını ve
 bilinen riskleri tek bir hafıza (memory) kaynağında tutmaktır.
@@ -46,6 +50,19 @@ bilinen riskleri tek bir hafıza (memory) kaynağında tutmaktır.
   kullanım yerleri.
 - [[Guvenlik_Notlari]] — Tespit edilen güvenlik zafiyetleri ve riskler
   (analiz amaçlı; düzeltme bu wiki'nin kapsamı dışında).
+
+## UI Bileşenleri
+
+Sayfalar arasında tekrarlanan görsel/etkileşim desenleri ayrı node'lar
+olarak belgelenmiştir:
+
+- [[Navbar]] — Sticky üst gezinme çubuğu (tüm genel sayfalarda).
+- [[Footer]] — Ortak alt bilgi bandı (tüm genel sayfalarda).
+- [[Prime_Banner]] — İç sayfa başlık bandı ([[Ana_Sayfa]] ve
+  [[Admin_Paneli]] hariç).
+- [[Kart_Bileseni]] — Aksiyon/hizmet/danışman/ilan kartı ailesi.
+- [[Modal]] — İlan detay penceresi (sadece [[Ilanlar]]).
+- [[Admin_Form]] — [[Admin_Paneli]]'ndeki ilan/danışman form deseni.
 
 ## Hızlı Gezinme İpuçları
 

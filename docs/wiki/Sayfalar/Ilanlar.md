@@ -1,5 +1,9 @@
 # Portföy / İlanlar (`ilanlar.html`)
 
+> **Özet:** Satılık/kiralık ilanları kart grid'i ve detay modalı olarak gösteren, `localStorage`'daki `remax_properties` verisini (yoksa hardcoded `defaultProperties`'i) okuyan tek dinamik genel sayfadır. Veri [[Admin_Paneli]] üzerinden yönetilir.
+> **Kütüphaneler:** HTML5, CSS3 (Grid, `position:fixed` modal), Vanilla JavaScript, Font Awesome 6.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]], [[Modal]], [[LocalStorage_Semasi]], [[Iletisim]]
+
 Bkz. [[Home]], [[Mimari]], [[LocalStorage_Semasi]], [[Admin_Paneli]],
 [[Tasarim_Sistemi]].
 

@@ -1,5 +1,9 @@
 # Mimari
 
+> **Özet:** Site, build sistemi veya framework kullanmayan, her sayfanın kendi `<style>`/`<script>` bloğunu taşıdığı 7 bağımsız statik HTML dosyasından oluşur. Dinamik veri (ilan/danışman) sunucu yerine tarayıcının `localStorage`'ında tutulur ve [[Admin_Paneli]] üzerinden yönetilir.
+> **Kütüphaneler:** HTML5, CSS3, Vanilla JavaScript, Font Awesome 6 (CDN) — paket yöneticisi veya bundler yok.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Admin_Paneli]], [[LocalStorage_Semasi]]
+
 Bkz. genel bakış için [[Home]].
 
 ## Teknoloji Yığını

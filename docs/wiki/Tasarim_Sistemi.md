@@ -1,5 +1,9 @@
 # Tasarım Sistemi
 
+> **Özet:** Sitenin renk paleti (`--remax-red`, `--remax-blue`), tipografisi ve tekrarlanan bileşen görsel dilini tanımlar; her sayfada elle kopyalanan CSS ile tutarlı kılınır, tek bir paylaşılan stylesheet yoktur. Responsive davranış 900px ([[Ana_Sayfa]]) ve 768px (diğer iç sayfalar) kırılma noktalarına dayanır.
+> **Kütüphaneler:** CSS3 (Custom Properties, Flexbox, Grid), Font Awesome 6.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]], [[Modal]]
+
 Bkz. [[Home]], [[Mimari]].
 
 Her sayfa kendi `<style>` bloğunu tekrar tanımladığı için burada anlatılan

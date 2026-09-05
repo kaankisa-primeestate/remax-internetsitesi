@@ -1,5 +1,9 @@
 # Ana Sayfa (`index.html`)
 
+> **Özet:** Sitenin giriş sayfasıdır; "satmak isteyenler" ve "kariyer yapmak isteyenler" için iki ayrı CTA sunan, tamamen statik bir pazarlama/tanıtım sayfasıdır. `localStorage` verisine bağımlı değildir ve tek harici bağımlılığı Unsplash hero görselidir.
+> **Kütüphaneler:** HTML5, CSS3 (Grid/Flexbox), Vanilla JavaScript (`toggleMenu()`), Font Awesome 6.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Kart_Bileseni]] (`.action-card`), [[Hizmetler]], [[Kurumsal]]
+
 Bkz. [[Home]], [[Mimari]], [[Tasarim_Sistemi]].
 
 ## Amaç

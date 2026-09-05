@@ -1,5 +1,9 @@
 # Danışmanlarımız (`danismanlar.html`)
 
+> **Özet:** Ekip kadrosunu kart grid'i olarak gösteren, `localStorage`'daki `remax_agents` verisini (yoksa hardcoded `defaultAgents`'i) okuyan dinamik sayfadır. Veri [[Admin_Paneli]] üzerinden yönetilir; modal/detay görünümü yoktur.
+> **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript, Font Awesome 6.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]] (`.agent-card`), [[LocalStorage_Semasi]], [[Medya_Varliklari]]
+
 Bkz. [[Home]], [[Mimari]], [[LocalStorage_Semasi]], [[Admin_Paneli]],
 [[Tasarim_Sistemi]], [[Medya_Varliklari]].
 

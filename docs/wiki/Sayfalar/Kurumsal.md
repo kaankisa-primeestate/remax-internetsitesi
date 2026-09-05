@@ -1,5 +1,9 @@
 # Kurumsal & Ofisimiz (`kurumsal.html`)
 
+> **Özet:** Fiziksel RE/MAX Prime ofisini 6 hardcoded fotoğraflı bir galeri ve kısa bir "Hakkımızda" metniyle tanıtan, tamamen statik sayfadır. `localStorage` verisi kullanmaz.
+> **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript (`toggleMenu()`), Font Awesome 6.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Medya_Varliklari]]
+
 Bkz. [[Home]], [[Mimari]], [[Tasarim_Sistemi]], [[Medya_Varliklari]].
 
 ## Amaç

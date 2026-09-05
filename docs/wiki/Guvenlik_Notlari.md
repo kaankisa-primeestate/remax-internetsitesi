@@ -1,5 +1,9 @@
 # Güvenlik Notları
 
+> **Özet:** [[Admin_Paneli]]'nin istemci tarafında düz metin şifre kullanması, sunucu doğrulamasının hiç olmaması ve kullanıcı girdisinin kaçışlanmadan `innerHTML`'e yazılması, bu depodaki en kritik tespit edilmiş risklerdir. Bu belge sadece analiz amaçlıdır, kodda düzeltme içermez.
+> **Kütüphaneler:** Vanilla JavaScript (`localStorage`, `innerHTML`) — güvenlik kütüphanesi/sanitizer kullanılmıyor.
+> **Bağlantılar:** [[Admin_Form]], [[Kart_Bileseni]], [[Ilanlar]], [[Danismanlar]]
+
 Bkz. [[Home]], [[Admin_Paneli]], [[LocalStorage_Semasi]].
 
 Bu belge yalnızca **analiz/tespit** amaçlıdır; kural gereği bu wiki

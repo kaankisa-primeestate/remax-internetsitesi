@@ -1,5 +1,9 @@
 # LocalStorage Şeması
 
+> **Özet:** Sitenin tek "veritabanı" katmanıdır; `remax_properties` ve `remax_agents` anahtarları altında JSON dizileri olarak tarayıcıda saklanır ve [[Admin_Paneli]] tarafından yazılıp [[Ilanlar]] / [[Danismanlar]] tarafından okunur. Görseller harici depoya değil, base64 JPEG olarak doğrudan bu kayıtların içine gömülür.
+> **Kütüphaneler:** Web Storage API (`localStorage`), `FileReader` API, `<canvas>` (görsel sıkıştırma).
+> **Bağlantılar:** [[Admin_Form]], [[Kart_Bileseni]], [[Modal]], [[Ilanlar]], [[Danismanlar]]
+
 Bkz. [[Home]], [[Mimari]], [[Admin_Paneli]].
 
 Sitenin tek "veritabanı" katmanı, tarayıcının `window.localStorage`

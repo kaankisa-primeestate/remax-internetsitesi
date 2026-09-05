@@ -1,5 +1,9 @@
 # İletişim (`iletisim.html`)
 
+> **Özet:** Adres, telefon, e-posta bilgilerini ve gömülü bir Google Maps haritasını sunan tamamen statik sayfadır; `localStorage` verisi kullanmaz. [[Ilanlar]] modalındaki "İletişime Geçin" butonunun hedefidir.
+> **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript (`toggleMenu()`), Google Maps `<iframe>` embed.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Modal]] (İlanlar detayından yönlendirme)
+
 Bkz. [[Home]], [[Mimari]], [[Tasarim_Sistemi]].
 
 ## Amaç

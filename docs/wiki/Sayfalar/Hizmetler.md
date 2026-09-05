@@ -1,5 +1,9 @@
 # Hizmetlerimiz (`hizmetler.html`)
 
+> **Özet:** Sunulan 6 hizmeti kart grid'i olarak listeleyen, tamamen statik bir sayfadır. "Hizmet Talebi Oluştur" butonları gerçek bir form gönderimi yapmaz, yalnızca bir `alert()` gösterir.
+> **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript (`toggleMenu()`, `alert()`), Font Awesome 6.
+> **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]] (`.service-card`), [[Ana_Sayfa]]
+
 Bkz. [[Home]], [[Mimari]], [[Tasarim_Sistemi]].
 
 ## Amaç

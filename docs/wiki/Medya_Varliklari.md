@@ -1,5 +1,9 @@
 # Medya Varlıkları
 
+> **Özet:** Depo kökünde, alt klasörsüz şekilde duran telefon kaynaklı görseller ve iki büyük reklam PNG'si, [[Kurumsal]], [[Ilanlar]] ve [[Danismanlar]] sayfalarında dosya adıyla doğrudan referans veriliyor. Bir kısmı hiçbir sayfada kullanılmıyor ve reklam görselleri optimize edilmemiş boyutta.
+> **Kütüphaneler:** Yok — statik `.jpeg`/`.png`/`.mp4` dosyaları, herhangi bir görsel işleme/CDN kütüphanesi kullanılmıyor.
+> **Bağlantılar:** [[Kart_Bileseni]], [[Kurumsal]], [[Ilanlar]], [[Danismanlar]]
+
 Bkz. [[Home]], [[Kurumsal]], [[Ilanlar]], [[Danismanlar]].
 
 Depo kökünde, telefon kaynaklı otomatik dosya adlarıyla (`WhatsApp Image
