@@ -4,7 +4,7 @@
 > **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript, Font Awesome 6.
 > **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]] (`.agent-card`), [[LocalStorage_Semasi]], [[Medya_Varliklari]]
 
-Bkz. [[Home]], [[Mimari]], [[LocalStorage_Semasi]], [[Admin_Paneli]],
+Bkz. [[Index]], [[Mimari]], [[LocalStorage_Semasi]], [[Admin_Paneli]],
 [[Tasarim_Sistemi]], [[Medya_Varliklari]].
 
 ## Amaç

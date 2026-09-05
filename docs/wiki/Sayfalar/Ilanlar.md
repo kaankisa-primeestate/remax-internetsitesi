@@ -4,7 +4,7 @@
 > **Kütüphaneler:** HTML5, CSS3 (Grid, `position:fixed` modal), Vanilla JavaScript, Font Awesome 6.
 > **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]], [[Modal]], [[LocalStorage_Semasi]], [[Iletisim]]
 
-Bkz. [[Home]], [[Mimari]], [[LocalStorage_Semasi]], [[Admin_Paneli]],
+Bkz. [[Index]], [[Mimari]], [[LocalStorage_Semasi]], [[Admin_Paneli]],
 [[Tasarim_Sistemi]].
 
 ## Amaç

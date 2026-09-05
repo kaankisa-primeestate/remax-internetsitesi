@@ -4,10 +4,10 @@
 > **Kütüphaneler:** Vanilla JavaScript (`localStorage`, `innerHTML`) — güvenlik kütüphanesi/sanitizer kullanılmıyor.
 > **Bağlantılar:** [[Admin_Form]], [[Kart_Bileseni]], [[Ilanlar]], [[Danismanlar]]
 
-Bkz. [[Home]], [[Admin_Paneli]], [[LocalStorage_Semasi]].
+Bkz. [[Index]], [[Admin_Paneli]], [[LocalStorage_Semasi]].
 
 Bu belge yalnızca **analiz/tespit** amaçlıdır; kural gereği bu wiki
-üzerinden kodda düzeltme yapılmamıştır (bkz. [[Home]] — Temel Kurallar).
+üzerinden kodda düzeltme yapılmamıştır (bkz. [[Index]] — Temel Kurallar).
 
 ## 1. İstemci Tarafında Açık Metin Şifre
 

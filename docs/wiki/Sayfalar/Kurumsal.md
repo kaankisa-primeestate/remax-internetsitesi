@@ -4,7 +4,7 @@
 > **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript (`toggleMenu()`), Font Awesome 6.
 > **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Medya_Varliklari]]
 
-Bkz. [[Home]], [[Mimari]], [[Tasarim_Sistemi]], [[Medya_Varliklari]].
+Bkz. [[Index]], [[Mimari]], [[Tasarim_Sistemi]], [[Medya_Varliklari]].
 
 ## Amaç
 

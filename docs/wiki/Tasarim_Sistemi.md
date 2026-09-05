@@ -4,7 +4,7 @@
 > **Kütüphaneler:** CSS3 (Custom Properties, Flexbox, Grid), Font Awesome 6.
 > **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]], [[Modal]]
 
-Bkz. [[Home]], [[Mimari]].
+Bkz. [[Index]], [[Mimari]].
 
 Her sayfa kendi `<style>` bloğunu tekrar tanımladığı için burada anlatılan
 "sistem" resmi bir paylaşılan stylesheet değil, **sayfalar arasında elle

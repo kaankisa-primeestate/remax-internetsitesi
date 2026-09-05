@@ -1,4 +1,8 @@
-# RE/MAX Prime İnternet Sitesi — Wiki
+# RE/MAX Prime İnternet Sitesi — Wiki (Ana Harita)
+
+> Bu dosya **ana haritadır** (bkz. depo kökündeki `CLAUDE.md` →
+> Operasyonlar bölümü). Her INGEST sonrası bu dosya güncellenir; her QUERY
+> öncesinde önce bu dosya okunur.
 
 > **Özet:** Bu sayfa, RE/MAX Prime tanıtım/portföy sitesinin tüm wiki dokümantasyonuna giriş noktasıdır ve site haritası, mimari, tasarım sistemi ile veri modeli notlarını tek yerden birbirine bağlar. Depo, framework veya backend içermeyen, saf statik HTML/CSS/JS sayfalarından oluşur.
 > **Kütüphaneler:** HTML5, CSS3, Vanilla JavaScript, Font Awesome 6 (CDN).
@@ -63,6 +67,13 @@ olarak belgelenmiştir:
 - [[Kart_Bileseni]] — Aksiyon/hizmet/danışman/ilan kartı ailesi.
 - [[Modal]] — İlan detay penceresi (sadece [[Ilanlar]]).
 - [[Admin_Form]] — [[Admin_Paneli]]'ndeki ilan/danışman form deseni.
+
+## Ingest Günlüğü
+
+| Tarih | Kapsam | Not |
+|---|---|---|
+| 2026-09-05 | İlk INGEST | Tüm depo (7 HTML sayfası + medya) tarandı; [[Mimari]], [[Tasarim_Sistemi]], [[LocalStorage_Semasi]], [[Guvenlik_Notlari]], [[Medya_Varliklari]], 7 sayfa notu ve 6 UI bileşen node'u oluşturuldu. |
+| 2026-09-05 | Format güncellemesi | Tüm node'lara zorunlu Özet/Kütüphaneler/Bağlantılar başlığı eklendi; ana harita `Home.md` → `Index.md` olarak yeniden adlandırıldı. |
 
 ## Hızlı Gezinme İpuçları
 

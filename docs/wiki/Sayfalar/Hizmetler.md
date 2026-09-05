@@ -4,7 +4,7 @@
 > **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript (`toggleMenu()`, `alert()`), Font Awesome 6.
 > **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Kart_Bileseni]] (`.service-card`), [[Ana_Sayfa]]
 
-Bkz. [[Home]], [[Mimari]], [[Tasarim_Sistemi]].
+Bkz. [[Index]], [[Mimari]], [[Tasarim_Sistemi]].
 
 ## Amaç
 

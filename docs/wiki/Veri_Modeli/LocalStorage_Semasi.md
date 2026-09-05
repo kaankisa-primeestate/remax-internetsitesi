@@ -4,7 +4,7 @@
 > **Kütüphaneler:** Web Storage API (`localStorage`), `FileReader` API, `<canvas>` (görsel sıkıştırma).
 > **Bağlantılar:** [[Admin_Form]], [[Kart_Bileseni]], [[Modal]], [[Ilanlar]], [[Danismanlar]]
 
-Bkz. [[Home]], [[Mimari]], [[Admin_Paneli]].
+Bkz. [[Index]], [[Mimari]], [[Admin_Paneli]].
 
 Sitenin tek "veritabanı" katmanı, tarayıcının `window.localStorage`
 nesnesidir. İki anahtar (key) kullanılıyor:

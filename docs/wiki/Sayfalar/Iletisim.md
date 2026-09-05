@@ -4,7 +4,7 @@
 > **Kütüphaneler:** HTML5, CSS3 (Grid), Vanilla JavaScript (`toggleMenu()`), Google Maps `<iframe>` embed.
 > **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Modal]] (İlanlar detayından yönlendirme)
 
-Bkz. [[Home]], [[Mimari]], [[Tasarim_Sistemi]].
+Bkz. [[Index]], [[Mimari]], [[Tasarim_Sistemi]].
 
 ## Amaç
 

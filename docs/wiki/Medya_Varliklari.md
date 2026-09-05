@@ -4,7 +4,7 @@
 > **Kütüphaneler:** Yok — statik `.jpeg`/`.png`/`.mp4` dosyaları, herhangi bir görsel işleme/CDN kütüphanesi kullanılmıyor.
 > **Bağlantılar:** [[Kart_Bileseni]], [[Kurumsal]], [[Ilanlar]], [[Danismanlar]]
 
-Bkz. [[Home]], [[Kurumsal]], [[Ilanlar]], [[Danismanlar]].
+Bkz. [[Index]], [[Kurumsal]], [[Ilanlar]], [[Danismanlar]].
 
 Depo kökünde, telefon kaynaklı otomatik dosya adlarıyla (`WhatsApp Image
 2026-08-23 at HH.MM.SS (n).jpeg`) 16 adet görsel, 1 adet video ve 2 adet

@@ -4,7 +4,7 @@
 > **Kütüphaneler:** HTML5 (`<form>`, `FileReader`, `<canvas>`), Vanilla JavaScript, Font Awesome 6.
 > **Bağlantılar:** [[Admin_Form]], [[LocalStorage_Semasi]], [[Ilanlar]], [[Danismanlar]], [[Guvenlik_Notlari]]
 
-Bkz. [[Home]], [[Mimari]], [[LocalStorage_Semasi]], [[Guvenlik_Notlari]].
+Bkz. [[Index]], [[Mimari]], [[LocalStorage_Semasi]], [[Guvenlik_Notlari]].
 
 ## Amaç
 

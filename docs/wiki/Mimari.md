@@ -4,7 +4,7 @@
 > **Kütüphaneler:** HTML5, CSS3, Vanilla JavaScript, Font Awesome 6 (CDN) — paket yöneticisi veya bundler yok.
 > **Bağlantılar:** [[Navbar]], [[Footer]], [[Prime_Banner]], [[Admin_Paneli]], [[LocalStorage_Semasi]]
 
-Bkz. genel bakış için [[Home]].
+Bkz. genel bakış için [[Index]].
 
 ## Teknoloji Yığını
 
