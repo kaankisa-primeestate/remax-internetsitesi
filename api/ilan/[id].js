@@ -21,8 +21,8 @@ module.exports = async (req, res) => {
   }
 
   const siteUrl = "https://remaxprimebostanci.com";
-  const images = listing.images && listing.images.length ? listing.images : ["images/ofis/acik-ofis.webp"];
-  const ogImage = `${siteUrl}/${images[0]}`;
+  const images = listing.images && listing.images.length ? listing.images : ["/images/ofis/acik-ofis.webp"];
+  const ogImage = images[0].startsWith("http") ? images[0] : `${siteUrl}${images[0]}`;
   const pageUrl = `${siteUrl}/ilan/${encodeURIComponent(listing.id)}`;
   const desc = listing.description || `${listing.title} - ${listing.location} - ${listing.price}`;
 
