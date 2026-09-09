@@ -1,0 +1,9 @@
+{
+  "name": "remax-prime-bostanci",
+  "private": true,
+  "version": "1.0.0",
+  "description": "RE/MAX Prime Bostanci - kurumsal site + ilan/danisman API",
+  "dependencies": {
+    "@vercel/kv": "^3.0.0"
+  }
+}

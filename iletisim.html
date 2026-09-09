@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İletişim | RE/MAX Prime</title>
+    <meta name="description" content="RE/MAX Prime Bostancı ofisiyle iletişime geçin: adres, telefon, WhatsApp ve ücretsiz gayrimenkul değerleme formu.">
+    <link rel="canonical" href="https://remaxprimebostanci.com/iletisim.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="İletişim | RE/MAX Prime">
+    <meta property="og:description" content="Bostancı ofisimizi ziyaret edin, arayın veya WhatsApp'tan yazın.">
+    <meta property="og:url" content="https://remaxprimebostanci.com/iletisim.html">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --remax-red: #dc2626; --remax-blue: #002b49; --dark: #1f2937; }
@@ -33,12 +40,28 @@
         .map-box { position:relative; border-radius:10px; overflow:hidden; border:1px solid #e2e8f0; min-height:300px; }
         .btn-nav { display:inline-block; margin-top:1rem; background:#16a34a; color:#fff; padding:0.7rem 1.2rem; border-radius:5px; text-decoration:none; font-weight:bold; font-size:0.85rem; }
 
+        .form-section { margin-top:1.5rem; background:#fff; padding:1.5rem; border-radius:10px; border:1px solid #e2e8f0; }
+        .form-section h2 { color:var(--remax-blue); font-size:1.15rem; margin-bottom:0.3rem; }
+        .form-section .sub { color:#64748b; font-size:0.85rem; margin-bottom:1.2rem; }
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .form-grid .full { grid-column:1/-1; }
+        .form-group label { display:block; font-size:0.82rem; font-weight:600; margin-bottom:0.35rem; color:var(--dark); }
+        .form-group input, .form-group textarea { width:100%; padding:0.7rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.9rem; font-family:inherit; }
+        .form-group textarea { resize:vertical; min-height:90px; }
+        .honeypot { position:absolute; left:-9999px; opacity:0; height:0; }
+        .btn-submit { margin-top:1.2rem; width:100%; background:var(--remax-red); color:#fff; border:none; padding:0.9rem; border-radius:6px; font-weight:bold; font-size:0.95rem; cursor:pointer; }
+        .btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+        .form-msg { margin-top:0.9rem; font-size:0.85rem; padding:0.7rem 0.9rem; border-radius:6px; display:none; }
+        .form-msg.ok { display:block; background:#dcfce7; color:#166534; }
+        .form-msg.err { display:block; background:#fee2e2; color:#991b1b; }
+
         @media (max-width: 768px) {
             .menu-toggle { display:block; }
             .nav-menu { display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%; background:#fff; padding:1rem; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
             .nav-menu.active { display:flex; }
             .prime-banner { flex-direction:column; text-align:center; gap:0.8rem; margin:1rem; }
             .contact-grid { grid-template-columns:1fr; }
+            .form-grid { grid-template-columns:1fr; }
         }
 
         footer { background:var(--remax-blue); color:#fff; text-align:center; padding:1.2rem 0; margin-top:2.5rem; font-size:0.85rem; }
@@ -81,6 +104,10 @@
                     <div><strong>Telefon:</strong><br><a href="tel:02163727372" style="color:var(--dark); text-decoration:none;">0216 372 73 72</a></div>
                 </div>
                 <div class="info-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div><strong>WhatsApp:</strong><br><a id="waContactLink" href="#" target="_blank" rel="noopener" style="color:var(--dark); text-decoration:none;">0542 378 15 40</a></div>
+                </div>
+                <div class="info-item">
                     <i class="fas fa-envelope"></i>
                     <div><strong>E-Posta:</strong><br><a href="mailto:info@remaxprime.com.tr" style="color:var(--dark); text-decoration:none;">info@remaxprime.com.tr</a></div>
                 </div>
@@ -91,11 +118,79 @@
                 <iframe width="100%" height="100%" style="min-height:300px; border:0;" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Bostanc%C4%B1%20Tavuk%C3%A7uo%C4%9Flu%20%C4%B0%C5%9F%20Merkezi&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
             </div>
         </div>
+
+        <section class="form-section" id="degerleme-formu">
+            <h2>Ücretsiz Değerleme / Hizmet Talebi</h2>
+            <p class="sub">Formu doldurun, danışmanlarımız en kısa sürede sizinle iletişime geçsin.</p>
+            <form id="contactForm">
+                <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="formType" value="valuation">
+                <div class="form-grid">
+                    <div class="form-group"><label>Ad Soyad *</label><input type="text" name="name" required></div>
+                    <div class="form-group"><label>Telefon *</label><input type="tel" name="phone" required placeholder="05XX XXX XX XX"></div>
+                    <div class="form-group full"><label>E-Posta</label><input type="email" name="email"></div>
+                    <div class="form-group full"><label>Mesajınız</label><textarea name="message" id="msgField" placeholder="Gayrimenkulünüz veya talebiniz hakkında kısa bilgi..."></textarea></div>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">Talebi Gönder</button>
+                <div class="form-msg" id="formMsg"></div>
+            </form>
+        </section>
     </main>
 
     <script>
         function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+
+        var params = new URLSearchParams(location.search);
+        var hizmet = params.get('hizmet');
+        if (hizmet) {
+            document.getElementById('msgField').value = hizmet + ' hizmeti hakkında bilgi almak istiyorum.';
+        }
+
+        var form = document.getElementById('contactForm');
+        var submitBtn = document.getElementById('submitBtn');
+        var formMsg = document.getElementById('formMsg');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var data = Object.fromEntries(new FormData(form).entries());
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Gönderiliyor...';
+            formMsg.className = 'form-msg';
+
+            fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+              .then(function (res) {
+                  if (res.ok && res.body.ok) {
+                      formMsg.textContent = 'Talebiniz alındı. En kısa sürede sizinle iletişime geçeceğiz.';
+                      formMsg.className = 'form-msg ok';
+                      form.reset();
+                      if (window.trackEvent) trackEvent('form_submit', { form_name: 'iletisim_degerleme' });
+                  } else {
+                      formMsg.textContent = res.body.error || 'Bir hata oluştu, lütfen tekrar deneyin.';
+                      formMsg.className = 'form-msg err';
+                  }
+              })
+              .catch(function () {
+                  formMsg.textContent = 'Bağlantı hatası. Lütfen tekrar deneyin veya bizi telefonla arayın.';
+                  formMsg.className = 'form-msg err';
+              })
+              .finally(function () {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = 'Talebi Gönder';
+              });
+        });
     </script>
-    <footer>&copy; 2026 RE/MAX Prime. Tüm Hakları Saklıdır.</footer>
+    <footer>
+        <div id="social-icons" style="margin-bottom:0.5rem;"></div>
+        &copy; 2026 RE/MAX Prime. Tüm Hakları Saklıdır.
+    </footer>
+    <script src="config.js"></script>
+    <script src="site.js"></script>
+    <script>
+        document.getElementById('waContactLink').href = buildWhatsAppLink();
+    </script>
 </body>
 </html>

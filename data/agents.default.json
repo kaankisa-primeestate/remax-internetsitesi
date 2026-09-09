@@ -1,0 +1,18 @@
+[
+  {
+    "id": "agent-1",
+    "name": "Kaan Kısa",
+    "title": "Kentsel Dönüşüm Uzmanı",
+    "phone": "0532 326 87 39",
+    "email": "kaankisa@gmail.com",
+    "image": ""
+  },
+  {
+    "id": "agent-2",
+    "name": "Alper Sarıalp",
+    "title": "Broker",
+    "phone": "0532 411 25 89",
+    "email": "alper@gmail.com",
+    "image": ""
+  }
+]

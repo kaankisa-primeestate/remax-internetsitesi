@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ornek-1",
+    "title": "Bağdat Caddesi'nde Geniş 3+1 Daire",
+    "category": "Konut",
+    "type": "Satılık",
+    "price": "₺ 45.000.000",
+    "location": "Suadiye, Kadıköy",
+    "rooms": "3+1",
+    "area": "165 m²",
+    "description": "Bağdat Caddesi'ne yakın, geniş ve ferah 3+1 daire. Örnek ilan - gerçek portföy admin panelinden eklenecektir.",
+    "images": ["images/ilanlar/ornek-daire-1.webp", "images/ilanlar/ornek-daire-1-b.webp"]
+  },
+  {
+    "id": "ornek-2",
+    "title": "Bostancı Sahilde Kiralık Prestijli Ofis",
+    "category": "Ticari",
+    "type": "Kiralık",
+    "price": "₺ 35.000",
+    "location": "Bostancı, Kadıköy",
+    "rooms": "1+1",
+    "area": "90 m²",
+    "description": "Bostancı sahil hattında, ulaşımı kolay prestijli ofis alanı. Örnek ilan - gerçek portföy admin panelinden eklenecektir.",
+    "images": ["images/ilanlar/ornek-ofis-1.webp"]
+  }
+]
