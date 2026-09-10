@@ -18,13 +18,16 @@
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
         body { background:#f8fafc; color:var(--dark); }
 
-        header { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.08); position:sticky; top:0; z-index:1000; }
-        .navbar { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1rem; position:relative; }
-        .logo-text { font-size:1.5rem; font-weight:800; color:var(--remax-red); }
-        .logo-sub { font-size:1.2rem; font-weight:300; color:var(--remax-blue); }
-        .nav-menu { display:flex; list-style:none; gap:1.5rem; }
-        .nav-menu a { text-decoration:none; color:var(--dark); font-weight:600; font-size:0.9rem; }
+        header { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.06); position:sticky; top:0; z-index:1000; }
+        .navbar { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1.5rem; position:relative; }
+        .logo-text { font-size:1.6rem; font-weight:800; color:var(--remax-red); }
+        .logo-sub { font-size:1.3rem; font-weight:300; color:var(--remax-blue); }
+        .nav-menu { display:flex; list-style:none; gap:1.5rem; align-items:center; }
+        .nav-menu a { text-decoration:none; color:var(--dark); font-weight:600; font-size:0.88rem; }
         .nav-menu a:hover, .nav-menu a.active { color:var(--remax-red); }
+        .nav-contact { display:flex; align-items:center; gap:1rem; }
+        .phone-link { text-decoration:none; color:var(--remax-blue); font-weight:700; font-size:0.9rem; display:flex; align-items:center; gap:0.4rem; }
+        .btn-header { background:var(--remax-blue); color:#fff; padding:0.5rem 1rem; border-radius:4px; text-decoration:none; font-weight:bold; font-size:0.82rem; }
         .menu-toggle { display:none; font-size:1.5rem; color:var(--remax-blue); cursor:pointer; }
 
         .page-hero { position:relative; background:url('images/ofis/toplanti-masasi.webp') center/cover no-repeat; padding:3.2rem 1.5rem 2.6rem; color:#fff; }
@@ -48,6 +51,7 @@
             .menu-toggle { display:block; }
             .nav-menu { display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%; background:#fff; padding:1rem; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
             .nav-menu.active { display:flex; }
+            .nav-contact { display:none; }
             .page-hero-inner { flex-direction:column; align-items:flex-start; gap:0.8rem; }
             .page-hero h1 { font-size:1.5rem; }
             .services-grid { grid-template-columns:1fr; }
@@ -69,6 +73,10 @@
                 <li><a href="danismanlar.html">Danışmanlarımız</a></li>
                 <li><a href="iletisim.html">İletişim</a></li>
             </ul>
+            <div class="nav-contact">
+                <a href="tel:02163727372" class="phone-link"><i class="fas fa-phone-alt"></i> 0216 372 73 72</a>
+                <a href="iletisim.html" class="btn-header">BİZE ULAŞIN</a>
+            </div>
         </nav>
     </header>
 

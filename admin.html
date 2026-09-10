@@ -52,6 +52,9 @@
         .btn-delete { background:#ef4444; color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.85rem; }
         .img-preview { width:50px; height:50px; object-fit:cover; border-radius:4px; margin-right:1rem; background:#e2e8f0; }
         .form-note { font-size:0.8rem; color:#94a3b8; margin-top:-0.5rem; margin-bottom:1rem; }
+        .form-msg { margin-top:0.8rem; font-size:0.85rem; padding:0.7rem 0.9rem; border-radius:6px; display:none; }
+        .form-msg.err { display:block; background:#fee2e2; color:#991b1b; }
+        .form-msg.ok { display:block; background:#dcfce7; color:#166534; }
         .msg-row { padding:0.9rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; margin-bottom:0.6rem; font-size:0.87rem; }
         .msg-row .meta { color:#94a3b8; font-size:0.78rem; margin-top:0.3rem; }
         .msg-tag { display:inline-block; background:var(--remax-blue); color:#fff; font-size:0.7rem; padding:0.15rem 0.5rem; border-radius:10px; margin-right:0.5rem; }
@@ -150,6 +153,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-msg" id="pFormError"></div>
                     <button type="submit" id="pBtnSubmit" class="btn-submit">İlanı Kaydet ve Yayınla</button>
                 </form>
 
@@ -191,6 +195,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-msg" id="aFormError"></div>
                     <button type="submit" id="aBtnSubmit" class="btn-submit">Danışmanı Ekip Listesine Ekle</button>
                 </form>
 
@@ -307,13 +312,37 @@
             }
         }
 
-        function handleSaveError(e) {
-            alert(e && e.error ? e.error : 'Kaydetme sırasında bir hata oluştu.');
+        function showFormError(elId, msg) {
+            var el = document.getElementById(elId);
+            if (!msg) { el.className = 'form-msg'; el.textContent = ''; return; }
+            el.className = 'form-msg err';
+            el.textContent = msg;
+        }
+
+        function handleSaveError(e, elId) {
+            var msg = e && e.error ? e.error : 'Kaydetme sırasında bir hata oluştu.';
+            if (elId) showFormError(elId, msg); else alert(msg);
+        }
+
+        function validatePropertyForm(editId) {
+            var title = document.getElementById('pTitle').value.trim();
+            var price = document.getElementById('pPrice').value.trim();
+            var location = document.getElementById('pLocation').value.trim();
+            if (title.length < 8) return 'İlan başlığı en az 8 karakter olmalı.';
+            if (!/\d/.test(price)) return 'Fiyat alanı rakam içermeli (örn: ₺ 1.500.000).';
+            if (location.length < 3) return 'Konum / semt bilgisi girilmeli.';
+            if (!editId && propImagesArray.length === 0) return 'Yeni ilan için en az 1 fotoğraf seçmelisiniz.';
+            return null;
         }
 
         function saveProperty(e) {
             e.preventDefault();
             var editId = document.getElementById('pEditId').value;
+            showFormError('pFormError', null);
+
+            var validationError = validatePropertyForm(editId);
+            if (validationError) return showFormError('pFormError', validationError);
+
             var payload = {
                 title: document.getElementById('pTitle').value,
                 category: document.getElementById('pCategory').value,
@@ -332,12 +361,12 @@
 
             req.then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
                .then(function (res) {
-                   if (!res.ok) return handleSaveError(res.body);
+                   if (!res.ok) return handleSaveError(res.body, 'pFormError');
                    alert(editId ? 'İlan güncellendi!' : 'Yeni ilan yüklendi!');
                    resetPropForm();
                    loadData();
                })
-               .catch(function () { handleSaveError(); });
+               .catch(function () { handleSaveError(null, 'pFormError'); });
         }
 
         function editProperty(id) {
@@ -367,11 +396,29 @@
             document.getElementById('propFormTitle').innerText = "Yeni İlan Ekle";
             document.getElementById('pBtnSubmit').innerText = "İlanı Kaydet ve Yayınla";
             document.getElementById('pImgLabel').innerText = "Fotoğraf Seçmek İçin Tıklayın";
+            showFormError('pFormError', null);
+        }
+
+        function validateAgentForm() {
+            var name = document.getElementById('aName').value.trim();
+            var title = document.getElementById('aTitle').value.trim();
+            var phone = document.getElementById('aPhone').value.replace(/[\s()-]/g, '');
+            var email = document.getElementById('aEmail').value.trim();
+            if (name.length < 3) return 'Ad soyad en az 3 karakter olmalı.';
+            if (title.length < 3) return 'Unvan / uzmanlık alanı girilmeli.';
+            if (!/^0?5\d{9}$/.test(phone)) return 'Telefon numarası geçerli bir Türkiye cep telefonu formatında olmalı (05XX XXX XX XX).';
+            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'E-posta adresi geçerli formatta değil.';
+            return null;
         }
 
         function saveAgent(e) {
             e.preventDefault();
             var editId = document.getElementById('aEditId').value;
+            showFormError('aFormError', null);
+
+            var validationError = validateAgentForm();
+            if (validationError) return showFormError('aFormError', validationError);
+
             var payload = {
                 name: document.getElementById('aName').value,
                 title: document.getElementById('aTitle').value,
@@ -386,12 +433,12 @@
 
             req.then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
                .then(function (res) {
-                   if (!res.ok) return handleSaveError(res.body);
+                   if (!res.ok) return handleSaveError(res.body, 'aFormError');
                    alert(editId ? 'Danışman bilgileri güncellendi!' : 'Danışman eklendi!');
                    resetAgentForm();
                    loadData();
                })
-               .catch(function () { handleSaveError(); });
+               .catch(function () { handleSaveError(null, 'aFormError'); });
         }
 
         function editAgent(id) {
@@ -417,6 +464,7 @@
             document.getElementById('agentFormTitle').innerText = "Yeni Danışman Ekle";
             document.getElementById('aBtnSubmit').innerText = "Danışmanı Ekip Listesine Ekle";
             document.getElementById('aImgLabel').innerText = "Fotoğraf Seçmek İçin Tıklayın";
+            showFormError('aFormError', null);
         }
 
         function deleteItem(type, id) {

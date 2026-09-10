@@ -1,5 +1,6 @@
 const { isAuthenticated } = require("./_lib/auth");
 const { getCollection, saveCollection, kvConfigured } = require("./_lib/store");
+const { validateListing } = require("./_lib/validate");
 
 function newId() {
   return "ilan-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -19,6 +20,8 @@ module.exports = async (req, res) => {
     const listings = await getCollection("listings");
 
     if (req.method === "POST") {
+      const check = validateListing(req.body, true);
+      if (!check.ok) return res.status(400).json({ ok: false, error: check.errors.join(" ") });
       const item = Object.assign({}, req.body, { id: newId() });
       listings.unshift(item);
       await saveCollection("listings", listings);
@@ -29,7 +32,10 @@ module.exports = async (req, res) => {
       const { id } = req.body || {};
       const idx = listings.findIndex((l) => l.id === id);
       if (idx === -1) return res.status(404).json({ ok: false, error: "İlan bulunamadı." });
-      listings[idx] = Object.assign({}, listings[idx], req.body);
+      const merged = Object.assign({}, listings[idx], req.body);
+      const check = validateListing(merged, false);
+      if (!check.ok) return res.status(400).json({ ok: false, error: check.errors.join(" ") });
+      listings[idx] = merged;
       await saveCollection("listings", listings);
       return res.status(200).json({ ok: true, listing: listings[idx] });
     }
