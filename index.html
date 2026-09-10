@@ -17,6 +17,9 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"RealEstateAgent","name":"RE/MAX Prime Bostancı","image":"https://remaxprimebostanci.com/images/ofis/resepsiyon.webp","telephone":"+902163727372","address":{"@type":"PostalAddress","streetAddress":"Bostancı Mah. Tarıkı Has Sk. Tavukçuoğlu İş Merkezi No: 2 İç Kapı No: 7","addressLocality":"Kadıköy","addressRegion":"İstanbul","postalCode":"34744","addressCountry":"TR"},"url":"https://remaxprimebostanci.com"}
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --remax-red: #dc2626; --remax-blue: #002b49; --dark: #1f2937; --light-bg: #f8fafc; }
@@ -26,8 +29,9 @@
         /* HEADER & NAVBAR */
         header { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.06); position:sticky; top:0; z-index:1000; }
         .navbar { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1.5rem; position:relative; }
-        .logo-text { font-size:1.6rem; font-weight:800; color:var(--remax-red); }
-        .logo-sub { font-size:1.3rem; font-weight:300; color:var(--remax-blue); }
+        .logo-text { font-family:'Montserrat','Segoe UI',sans-serif; font-size:1.6rem; font-weight:800; color:var(--remax-red); letter-spacing:-0.5px; }
+        .logo-slash { color:var(--remax-blue); }
+        .logo-sub { font-family:'Montserrat','Segoe UI',sans-serif; font-size:1.3rem; font-weight:300; color:var(--remax-blue); }
         .nav-menu { display:flex; list-style:none; gap:1.5rem; align-items:center; }
         .nav-menu a { text-decoration:none; color:var(--dark); font-weight:600; font-size:0.88rem; }
         .nav-menu a:hover, .nav-menu a.active { color:var(--remax-red); }
@@ -108,7 +112,7 @@
 
     <header>
         <nav class="navbar">
-            <div class="logo-container"><span class="logo-text">RE/MAX</span> <span class="logo-sub">PRIME</span></div>
+            <div class="logo-container"><span class="logo-text">RE<span class="logo-slash">/</span>MAX</span> <span class="logo-sub">PRIME</span></div>
             <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="active">Ana Sayfa</a></li>
