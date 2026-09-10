@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
     phone: body.phone.trim(),
     email: (body.email || "").trim(),
     message: (body.message || "").trim(),
-    formType: body.formType === "valuation" ? "Değerleme Talebi" : "İletişim",
+    formType: body.formType === "valuation" ? "Değerleme Talebi" : body.formType === "career" ? "Kariyer Başvurusu" : "İletişim",
     listingId: body.listingId || null,
     createdAt: new Date().toISOString()
   };

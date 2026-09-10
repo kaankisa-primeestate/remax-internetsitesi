@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   const siteUrl = "https://remaxprimebostanci.com";
   const staticPages = [
     "", "index.html", "kurumsal.html", "hizmetler.html",
-    "ilanlar.html", "danismanlar.html", "iletisim.html"
+    "ilanlar.html", "danismanlar.html", "iletisim.html", "kariyer.html"
   ];
 
   let listings = [];
