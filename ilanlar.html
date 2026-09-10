@@ -27,19 +27,22 @@
         .nav-menu a:hover, .nav-menu a.active { color:var(--remax-red); }
         .menu-toggle { display:none; font-size:1.5rem; color:var(--remax-blue); cursor:pointer; }
 
-        .prime-banner { max-width:1100px; margin:1.5rem auto 1rem; background:linear-gradient(135deg, #002b49 0%, #00406c 100%); border-left:5px solid var(--remax-red); border-radius:8px; padding:1.2rem 1.5rem; color:#fff; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 15px rgba(0,43,73,0.12); }
-        .prime-banner-text h2 { font-size:1.2rem; font-weight:700; margin-bottom:0.2rem; }
-        .prime-banner-text p { font-size:0.85rem; color:#cbd5e1; font-weight:300; }
-        .prime-badge { background:rgba(220,38,38,0.15); border:1px solid rgba(220,38,38,0.4); color:#fca5a5; padding:0.4rem 0.8rem; border-radius:20px; font-size:0.8rem; font-weight:600; display:flex; align-items:center; gap:0.4rem; }
+        .page-hero { position:relative; background:url('images/ofis/kafe-bar.webp') center/cover no-repeat; padding:3.2rem 1.5rem 2.6rem; color:#fff; }
+        .page-hero::before { content:""; position:absolute; inset:0; background:linear-gradient(to right, rgba(0,43,73,0.90) 25%, rgba(0,43,73,0.55) 100%); }
+        .page-hero-inner { max-width:1100px; margin:0 auto; position:relative; z-index:2; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.2rem; }
+        .page-hero h1 { font-size:1.9rem; font-weight:800; letter-spacing:-0.3px; margin-bottom:0.4rem; }
+        .page-hero p { font-size:0.92rem; color:#dbe4ea; font-weight:300; max-width:520px; }
+        .page-badge { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); color:#fff; padding:0.5rem 1rem; border-radius:24px; font-size:0.82rem; font-weight:600; display:flex; align-items:center; gap:0.5rem; white-space:nowrap; }
 
-        .container { max-width:1100px; margin:0 auto; padding:0 1rem 2.5rem; }
+        .container { max-width:1100px; margin:0 auto; padding:2rem 1rem 2.5rem; }
 
         .filter-bar { display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:1.5rem; background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:1rem; }
         .filter-bar select, .filter-bar input { padding:0.55rem 0.7rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem; }
         .filter-bar input { flex:1; min-width:160px; }
 
         .cards-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:1.5rem; }
-        .card { background:#fff; border-radius:8px; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 4px 12px rgba(0,0,0,0.04); text-decoration:none; color:inherit; display:block; }
+        .card { background:#fff; border-radius:8px; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 4px 12px rgba(0,0,0,0.04); text-decoration:none; color:inherit; display:block; transition:transform 0.25s ease, box-shadow 0.25s ease; }
+        .card:hover { transform:translateY(-5px); box-shadow:0 16px 28px rgba(0,0,0,0.12); }
         .card-img { height:200px; background-size:cover; background-position:center; position:relative; }
         .badge { position:absolute; top:10px; left:10px; background:var(--remax-red); color:#fff; padding:0.25rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:bold; }
         .photo-count { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.7); color:#fff; padding:0.2rem 0.5rem; border-radius:4px; font-size:0.75rem; }
@@ -54,7 +57,8 @@
             .menu-toggle { display:block; }
             .nav-menu { display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%; background:#fff; padding:1rem; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
             .nav-menu.active { display:flex; }
-            .prime-banner { flex-direction:column; text-align:center; gap:0.8rem; margin:1rem; }
+            .page-hero-inner { flex-direction:column; align-items:flex-start; gap:0.8rem; }
+            .page-hero h1 { font-size:1.5rem; }
             .cards-grid { grid-template-columns:1fr; }
         }
 
@@ -77,13 +81,15 @@
         </nav>
     </header>
 
-    <div class="prime-banner">
-        <div class="prime-banner-text">
-            <h2>Güncel Gayrimenkul Portföylerimiz</h2>
-            <p>RE/MAX Prime ayrıcalığıyla sunulan özel satılık ve kiralık taşınmazlar</p>
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div>
+                <h1>Güncel Gayrimenkul Portföylerimiz</h1>
+                <p>RE/MAX Prime ayrıcalığıyla sunulan özel satılık ve kiralık taşınmazlar</p>
+            </div>
+            <div class="page-badge"><i class="fas fa-building"></i> Portföylerimiz</div>
         </div>
-        <div class="prime-badge"><i class="fas fa-building"></i> Portföylerimiz</div>
-    </div>
+    </section>
 
     <main class="container">
         <div class="filter-bar">
