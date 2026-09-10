@@ -22,7 +22,9 @@
         body { background:#f8fafc; color:var(--dark); }
 
         header { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.06); position:sticky; top:0; z-index:1000; }
-        .navbar { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1.5rem; position:relative; }
+        .navbar { max-width:1320px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1.5rem; position:relative; }
+        .logo-container { display:flex; align-items:center; gap:0.5rem; }
+        .logo-balloon { height:34px; width:auto; border-radius:4px; }
         .logo-text { font-family:'Montserrat','Segoe UI',sans-serif; font-size:1.6rem; font-weight:800; color:var(--remax-red); letter-spacing:-0.5px; }
         .logo-slash { color:var(--remax-blue); }
         .logo-sub { font-family:'Montserrat','Segoe UI',sans-serif; font-size:1.3rem; font-weight:300; color:var(--remax-blue); }
@@ -70,7 +72,7 @@
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo-container"><span class="logo-text">RE<span class="logo-slash">/</span>MAX</span> <span class="logo-sub">PRIME</span></div>
+            <div class="logo-container"><img src="images/logo/remax-balon.webp" class="logo-balloon" alt="RE/MAX balon logosu"><span class="logo-text">RE<span class="logo-slash">/</span>MAX</span> <span class="logo-sub">PRIME</span></div>
             <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Ana Sayfa</a></li>
@@ -99,7 +101,7 @@
 
     <main class="container">
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="images/ofis/resepsiyon.webp" alt="RE/MAX Prime Bostancı ofis resepsiyon alanı" loading="lazy"><div class="gallery-caption"><h3>Karşılama & Resepsiyon</h3></div></div>
+            <div class="gallery-item"><img src="images/ofis/resepsiyon-balon.webp" alt="RE/MAX Prime Bostancı ofis resepsiyon alanı" loading="lazy"><div class="gallery-caption"><h3>Karşılama & Resepsiyon</h3></div></div>
             <div class="gallery-item"><img src="images/ofis/lounge.webp" alt="RE/MAX Prime Bostancı müşteri lounge alanı" loading="lazy"><div class="gallery-caption"><h3>Lounge & Müşteri Alanı</h3></div></div>
             <div class="gallery-item"><img src="images/ofis/toplanti-masasi.webp" alt="RE/MAX Prime Bostancı toplantı masası" loading="lazy"><div class="gallery-caption"><h3>Görüşme & Toplantı Masası</h3></div></div>
             <div class="gallery-item"><img src="images/ofis/acik-ofis.webp" alt="RE/MAX Prime Bostancı açık ofis çalışma alanı" loading="lazy"><div class="gallery-caption"><h3>Açık Çalışma Alanları</h3></div></div>
