@@ -147,7 +147,10 @@
             var container = document.getElementById('listings-container');
             var filtered = allProperties.filter(matchesFilters);
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-home" style="font-size:1.6rem; margin-bottom:0.6rem; display:block;"></i>Kriterlere uygun ilan bulunamadı.</div>';
+                var msg = allProperties.length === 0
+                    ? 'Yeni portföyümüz yakında burada olacak. Bize ulaşarak güncel fırsatları öğrenebilirsiniz.'
+                    : 'Kriterlere uygun ilan bulunamadı.';
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-home" style="font-size:1.6rem; margin-bottom:0.6rem; display:block;"></i>' + msg + '</div>';
                 return;
             }
             var html = '';
