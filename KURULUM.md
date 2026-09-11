@@ -12,19 +12,25 @@ işlemlerdir; kod tarafında ek bir şey gerekmez.
 3. Domain: `remaxprimebostanci.com` alan adını Project → Settings → Domains
    üzerinden ekleyin ve DNS kayıtlarını Vercel'in verdiği değerlerle güncelleyin.
 
-## 2. Kalıcı veri için Vercel KV bağlama (ZORUNLU)
+## 2. Kalıcı veri için Redis bağlama (ZORUNLU)
 
 Şu an ilanlar/danışmanlar örnek veriyle **salt okunur** çalışır; admin panelinden
-kayıt/güncelleme yapabilmek için bir KV veritabanı bağlanması gerekir:
+kayıt/güncelleme yapabilmek için bir Redis veritabanı bağlanması gerekir:
 
-1. Vercel dashboard → Project → **Storage** sekmesi → **Create Database** → **KV**.
-2. Oluşturduktan sonra **Connect Project** ile bu projeye bağlayın.
-   Bu işlem `KV_REST_API_URL` ve `KV_REST_API_TOKEN` ortam değişkenlerini
-   otomatik olarak ekler.
-3. Projeyi yeniden deploy edin (env değişkeni eklemek redeploy gerektirir).
+1. Vercel dashboard → Project → **Storage** sekmesi → **Create Database** → **Redis**
+   (ücretsiz "Free — 30 MB" planı bu proje için fazlasıyla yeterlidir).
+2. Oluşturduktan sonra **Connect Project** ile bu projeye bağlayın. **"Custom Prefix"**
+   alanına mutlaka **`KV`** yazın (varsayılan "STORAGE" değil) — kod, ortam
+   değişkenini `KV_REDIS_URL` ismiyle arıyor.
+3. Projeyi yeniden deploy edin (env değişkeni eklemek otomatik redeploy tetiklemez;
+   Deployments → son deployment → "⋯" → **Redeploy**).
 
-KV bağlanmadan önce admin panelinde sarı bir uyarı bandı görünür; bağlandıktan
+Redis bağlanmadan önce admin panelinde sarı bir uyarı bandı görünür; bağlandıktan
 sonra kaybolur ve kayıt işlemleri kalıcı hale gelir.
+
+> Not: Vercel'in eski "KV" ürünü (Upstash REST API tabanlı) yerini standart
+> Redis bağlantısına (`node-redis`, `KV_REDIS_URL`) bıraktı; bu proje güncel
+> ürünle uyumlu şekilde yazılmıştır.
 
 ## 3. Admin şifresi
 
@@ -63,7 +69,7 @@ window.SITE_CONFIG = {
 
 ## 5. İletişim/değerleme formu mesajlarını görme
 
-Formlar `/api/contact` üzerinden Vercel KV'ye yazılır. Admin panelinde
+Formlar `/api/contact` üzerinden Redis'e yazılır. Admin panelinde
 **Mesajlar** sekmesinden görüntülenir. E-postaya bildirim istiyorsanız
 ileride `api/contact.js` içine bir e-posta servisi (ör. Resend) eklenebilir —
 bu adım şu an kapsam dışı bırakıldı.
@@ -76,7 +82,7 @@ npx vercel dev
 ```
 
 `vercel dev` komutu hem statik sayfaları hem `api/` fonksiyonlarını
-localhost üzerinde çalıştırır. KV ortam değişkenleri tanımlı değilse
+localhost üzerinde çalıştırır. `KV_REDIS_URL` tanımlı değilse
 site otomatik olarak örnek veriyle çalışır.
 
 ## 7. Yayın sonrası SEO kontrol listesi
