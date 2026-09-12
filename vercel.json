@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    { "source": "/ilan/:id", "destination": "/api/ilan/:id" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+  ],
+  "headers": [
+    {
+      "source": "/images/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

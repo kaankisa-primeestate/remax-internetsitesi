@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yönetim Paneli | RE/MAX Prime</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { --remax-red: #dc2626; --remax-blue: #002b49; --dark: #1f2937; }
@@ -14,10 +16,13 @@
         .login-box h2 { color:var(--remax-blue); margin-bottom:1rem; }
         .login-box input { width:100%; padding:0.8rem; margin:1rem 0; border:1px solid #cbd5e1; border-radius:6px; text-align:center; font-size:1.1rem; }
         .login-box button { width:100%; background:var(--remax-red); color:#fff; padding:0.8rem; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:1rem; }
+        .login-error { color:var(--remax-red); font-size:0.85rem; margin-top:0.5rem; min-height:1.2em; }
 
-        .dashboard { display:none; max-width:1000px; margin:40px auto; background:#fff; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden; }
+        .kv-banner { max-width:1000px; margin:20px auto 0; background:#fef3c7; border:1px solid #f59e0b; color:#92400e; padding:0.9rem 1.2rem; border-radius:8px; font-size:0.85rem; display:none; }
+
+        .dashboard { display:none; max-width:1000px; margin:20px auto 40px; background:#fff; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.08); overflow:hidden; }
         .dash-header { background:var(--remax-blue); color:#fff; padding:1.2rem 2rem; display:flex; justify-content:space-between; align-items:center; }
-        
+
         .dash-nav { display:flex; background:#e2e8f0; border-bottom:1px solid #cbd5e1; }
         .dash-nav button { flex:1; padding:1rem; border:none; background:none; font-weight:bold; color:var(--dark); cursor:pointer; }
         .dash-nav button.active { background:#fff; color:var(--remax-red); border-bottom:3px solid var(--remax-red); }
@@ -30,45 +35,60 @@
         .form-group { margin-bottom:1rem; }
         .form-group.full { grid-column:1 / -1; }
         .form-group label { display:block; margin-bottom:0.4rem; font-weight:600; font-size:0.88rem; }
-        .form-group input, .form-group select { width:100%; padding:0.7rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.9rem; }
+        .form-group input, .form-group select, .form-group textarea { width:100%; padding:0.7rem; border:1px solid #cbd5e1; border-radius:6px; font-size:0.9rem; font-family:inherit; }
 
         .file-upload-box { border:2px dashed #cbd5e1; padding:1.5rem; text-align:center; border-radius:8px; background:#f8fafc; cursor:pointer; }
         .file-upload-box input[type="file"] { display:none; }
         .file-upload-box i { font-size:2rem; color:var(--remax-red); margin-bottom:0.5rem; }
 
         .btn-submit { background:var(--remax-red); color:#fff; padding:0.8rem 2rem; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:1rem; width:100%; margin-top:1rem; }
-        .btn-logout { background:rgba(255,255,255,0.2); color:#fff; padding:0.4rem 0.8rem; border:none; border-radius:4px; cursor:pointer; font-size:0.85rem; }
+        .btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+        .btn-logout { background:rgba(255,255,255,0.2); color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.85rem; }
 
         .item-list { margin-top:2rem; border-top:2px solid #e2e8f0; padding-top:1.5rem; }
-        .list-row { display:flex; justify-content:space-between; align-items:center; padding:0.8rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; margin-bottom:0.5rem; }
+        .list-row { display:flex; justify-content:space-between; align-items:center; padding:0.8rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; margin-bottom:0.5rem; gap:1rem; flex-wrap:wrap; }
         .btn-group { display:flex; gap:0.5rem; }
         .btn-edit { background:#2563eb; color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.85rem; }
         .btn-delete { background:#ef4444; color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.85rem; }
-        .img-preview { width:50px; height:50px; object-fit:cover; border-radius:4px; margin-right:1rem; }
+        .img-preview { width:50px; height:50px; object-fit:cover; border-radius:4px; margin-right:1rem; background:#e2e8f0; }
+        .form-note { font-size:0.8rem; color:#94a3b8; margin-top:-0.5rem; margin-bottom:1rem; }
+        .form-msg { margin-top:0.8rem; font-size:0.85rem; padding:0.7rem 0.9rem; border-radius:6px; display:none; }
+        .form-msg.err { display:block; background:#fee2e2; color:#991b1b; }
+        .form-msg.ok { display:block; background:#dcfce7; color:#166534; }
+        .msg-row { padding:0.9rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; margin-bottom:0.6rem; font-size:0.87rem; }
+        .msg-row .meta { color:#94a3b8; font-size:0.78rem; margin-top:0.3rem; }
+        .msg-tag { display:inline-block; background:var(--remax-blue); color:#fff; font-size:0.7rem; padding:0.15rem 0.5rem; border-radius:10px; margin-right:0.5rem; }
     </style>
 </head>
 <body>
 
     <div class="login-box" id="loginBox">
         <h2>RE/MAX Prime Panel</h2>
-        <p style="font-size:0.85rem; color:#64748b; margin-bottom:1rem;">Giriş Şifresi: <strong>1234</strong></p>
+        <p style="font-size:0.85rem; color:#64748b; margin-bottom:1rem;">Admin şifrenizi girin.</p>
         <input type="password" id="passInput" placeholder="Şifre Giriniz" onkeydown="if(event.key==='Enter') checkPass()">
         <button type="button" onclick="checkPass()">Giriş Yap</button>
+        <div class="login-error" id="loginError"></div>
+    </div>
+
+    <div class="kv-banner" id="kvBanner">
+        <i class="fas fa-triangle-exclamation"></i> Kalıcı depolama (Redis) henüz bağlı değil: değişiklikler kaydedilemez.
+        Kurulum adımları için proje köküne eklenen <strong>KURULUM.md</strong> dosyasına bakın.
     </div>
 
     <div class="dashboard" id="dashBox">
         <div class="dash-header">
             <h3>RE/MAX Prime Site Yönetimi</h3>
-            <button class="btn-logout" onclick="location.reload()">Çıkış Yap</button>
+            <button class="btn-logout" onclick="logout()">Çıkış Yap</button>
         </div>
 
         <div class="dash-nav">
             <button id="btnTab1" class="active" onclick="switchTab('ilanTab', this)">Portföy & İlan Yönetimi</button>
             <button id="btnTab2" onclick="switchTab('danismanTab', this)">Danışman Kadrosu Yönetimi</button>
+            <button id="btnTab3" onclick="switchTab('mesajTab', this)">Mesajlar</button>
         </div>
 
         <div class="dash-content">
-            
+
             <!-- İlan Sekmesi -->
             <div class="tab-pane active" id="ilanTab">
                 <h4 id="propFormTitle" style="margin-bottom:1.2rem; color:var(--remax-blue);">Yeni İlan Ekle</h4>
@@ -119,7 +139,11 @@
                             <label>Metrekare (m²)</label>
                             <input type="text" id="pArea" placeholder="Örn: 165 m²">
                         </div>
-                        
+                        <div class="form-group full">
+                            <label>Açıklama</label>
+                            <textarea id="pDescription" rows="3" placeholder="İlan detay sayfasında görünecek açıklama"></textarea>
+                        </div>
+
                         <div class="form-group full">
                             <label>İlan Fotoğrafları Seç (Değiştirmek istemiyorsanız boş bırakın)</label>
                             <div class="file-upload-box" onclick="document.getElementById('pImgFiles').click()">
@@ -129,6 +153,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-msg" id="pFormError"></div>
                     <button type="submit" id="pBtnSubmit" class="btn-submit">İlanı Kaydet ve Yayınla</button>
                 </form>
 
@@ -162,7 +187,7 @@
                         </div>
 
                         <div class="form-group full">
-                            <label>Danışman Profil Fotoğrafı (Değiştirmek istemiyorsanız boş bırakın)</label>
+                            <label>Danışman Profil Fotoğrafı (boş bırakılırsa baş harfli rozet gösterilir)</label>
                             <div class="file-upload-box" onclick="document.getElementById('aImgFile').click()">
                                 <i class="fas fa-user-circle"></i>
                                 <p id="aImgLabel">Fotoğraf Seçmek İçin Tıklayın</p>
@@ -170,6 +195,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-msg" id="aFormError"></div>
                     <button type="submit" id="aBtnSubmit" class="btn-submit">Danışmanı Ekip Listesine Ekle</button>
                 </form>
 
@@ -179,6 +205,13 @@
                 </div>
             </div>
 
+            <!-- Mesajlar Sekmesi -->
+            <div class="tab-pane" id="mesajTab">
+                <h4 style="margin-bottom:1.2rem; color:var(--remax-blue);">İletişim & Değerleme Talepleri</h4>
+                <p class="form-note">Bu liste yalnızca Redis bağlandıktan sonra dolmaya başlar.</p>
+                <div id="messageList"></div>
+            </div>
+
         </div>
     </div>
 
@@ -186,20 +219,68 @@
         var propImagesArray = [];
         var agentBase64 = "";
 
+        function authFetch(url, options) {
+            options = options || {};
+            options.headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {});
+            options.credentials = 'same-origin';
+            return fetch(url, options);
+        }
+
         function checkPass() {
             var val = document.getElementById('passInput').value;
-            if(val === '1234') {
-                document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('dashBox').style.display = 'block';
-                loadData();
-            } else { alert('Hatalı şifre!'); }
+            var errBox = document.getElementById('loginError');
+            errBox.textContent = '';
+            authFetch('/api/admin-login', { method: 'POST', body: JSON.stringify({ password: val }) })
+                .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+                .then(function (res) {
+                    if (res.ok && res.body.ok) {
+                        showDashboard();
+                    } else {
+                        errBox.textContent = res.body.error || 'Hatalı şifre.';
+                    }
+                })
+                .catch(function () { errBox.textContent = 'Bağlantı hatası.'; });
         }
+
+        function logout() {
+            authFetch('/api/admin-logout', { method: 'POST' }).finally(function () { location.reload(); });
+        }
+
+        function showDashboard() {
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('dashBox').style.display = 'block';
+            loadData();
+        }
+
+        // Zaten oturum açıksa şifre sormadan panele geç
+        authFetch('/api/admin-session').then(function (r) { return r.json(); }).then(function (j) {
+            if (j.authenticated) showDashboard();
+        }).catch(function () {});
 
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-pane').forEach(function(el) { el.classList.remove('active'); });
             document.querySelectorAll('.dash-nav button').forEach(function(el) { el.classList.remove('active'); });
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
+            if (tabId === 'mesajTab') loadMessages();
+        }
+
+        function resizeImage(file, maxSize, quality, cb) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = new Image();
+                img.onload = function () {
+                    var canvas = document.createElement('canvas');
+                    var width = img.width, height = img.height;
+                    if (width > height) { if (width > maxSize) { height *= maxSize / width; width = maxSize; } }
+                    else { if (height > maxSize) { width *= maxSize / height; height = maxSize; } }
+                    canvas.width = width; canvas.height = height;
+                    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                    cb(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
         function processMultipleImages(input, labelId) {
@@ -209,28 +290,13 @@
                 document.getElementById(labelId).innerText = files.length + " Adet Fotoğraf İşleniyor...";
                 var loadedCount = 0;
                 for (var i = 0; i < files.length; i++) {
-                    (function(file) {
-                        var reader = new FileReader();
-                        reader.onload = function(e) {
-                            var img = new Image();
-                            img.onload = function() {
-                                var canvas = document.createElement('canvas');
-                                var max_size = 800;
-                                var width = img.width, height = img.height;
-                                if (width > height) { if (width > max_size) { height *= max_size / width; width = max_size; } }
-                                else { if (height > max_size) { width *= max_size / height; height = max_size; } }
-                                canvas.width = width; canvas.height = height;
-                                var ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
-                                propImagesArray.push(canvas.toDataURL('image/jpeg', 0.7));
-                                loadedCount++;
-                                if (loadedCount === files.length) {
-                                    document.getElementById(labelId).innerText = files.length + " Adet Fotoğraf Yüklendi (Hazır)";
-                                }
-                            };
-                            img.src = e.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    })(files[i]);
+                    resizeImage(files[i], 900, 0.75, function (dataUrl) {
+                        propImagesArray.push(dataUrl);
+                        loadedCount++;
+                        if (loadedCount === files.length) {
+                            document.getElementById(labelId).innerText = files.length + " Adet Fotoğraf Yüklendi (Hazır)";
+                        }
+                    });
                 }
             }
         }
@@ -239,73 +305,72 @@
             var file = input.files[0];
             if (file) {
                 document.getElementById(labelId).innerText = "İşleniyor: " + file.name;
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var img = new Image();
-                    img.onload = function() {
-                        var canvas = document.createElement('canvas');
-                        var max_size = 600;
-                        var width = img.width, height = img.height;
-                        if (width > height) { if (width > max_size) { height *= max_size / width; width = max_size; } }
-                        else { if (height > max_size) { width *= max_size / height; height = max_size; } }
-                        canvas.width = width; canvas.height = height;
-                        var ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, width, height);
-                        agentBase64 = canvas.toDataURL('image/jpeg', 0.85);
-                        document.getElementById(labelId).innerText = "Seçildi: " + file.name;
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
+                resizeImage(file, 500, 0.85, function (dataUrl) {
+                    agentBase64 = dataUrl;
+                    document.getElementById(labelId).innerText = "Seçildi: " + file.name;
+                });
             }
+        }
+
+        function showFormError(elId, msg) {
+            var el = document.getElementById(elId);
+            if (!msg) { el.className = 'form-msg'; el.textContent = ''; return; }
+            el.className = 'form-msg err';
+            el.textContent = msg;
+        }
+
+        function handleSaveError(e, elId) {
+            var msg = e && e.error ? e.error : 'Kaydetme sırasında bir hata oluştu.';
+            if (elId) showFormError(elId, msg); else alert(msg);
+        }
+
+        function validatePropertyForm(editId) {
+            var title = document.getElementById('pTitle').value.trim();
+            var price = document.getElementById('pPrice').value.trim();
+            var location = document.getElementById('pLocation').value.trim();
+            if (title.length < 8) return 'İlan başlığı en az 8 karakter olmalı.';
+            if (!/\d/.test(price)) return 'Fiyat alanı rakam içermeli (örn: ₺ 1.500.000).';
+            if (location.length < 3) return 'Konum / semt bilgisi girilmeli.';
+            if (!editId && propImagesArray.length === 0) return 'Yeni ilan için en az 1 fotoğraf seçmelisiniz.';
+            return null;
         }
 
         function saveProperty(e) {
             e.preventDefault();
-            var properties = JSON.parse(localStorage.getItem('remax_properties')) || [];
             var editId = document.getElementById('pEditId').value;
+            showFormError('pFormError', null);
 
-            if (editId) {
-                properties = properties.map(function(p) {
-                    if (p.id == editId) {
-                        p.title = document.getElementById('pTitle').value;
-                        p.category = document.getElementById('pCategory').value;
-                        p.type = document.getElementById('pType').value;
-                        p.price = document.getElementById('pPrice').value;
-                        p.location = document.getElementById('pLocation').value;
-                        p.rooms = document.getElementById('pRooms').value;
-                        p.area = document.getElementById('pArea').value;
-                        if (propImagesArray.length > 0) {
-                            p.images = propImagesArray;
-                            p.image = propImagesArray[0];
-                        }
-                    }
-                    return p;
-                });
-                alert('İlan başarıyla güncellendi!');
-            } else {
-                properties.push({
-                    id: Date.now(),
-                    title: document.getElementById('pTitle').value,
-                    category: document.getElementById('pCategory').value,
-                    type: document.getElementById('pType').value,
-                    price: document.getElementById('pPrice').value,
-                    location: document.getElementById('pLocation').value,
-                    rooms: document.getElementById('pRooms').value,
-                    area: document.getElementById('pArea').value,
-                    images: propImagesArray.length > 0 ? propImagesArray : ['https://via.placeholder.com/400x300?text=Fotograf+Yok'],
-                    image: propImagesArray.length > 0 ? propImagesArray[0] : 'https://via.placeholder.com/400x300?text=Fotograf+Yok'
-                });
-                alert('Yeni ilan yüklendi!');
-            }
+            var validationError = validatePropertyForm(editId);
+            if (validationError) return showFormError('pFormError', validationError);
 
-            localStorage.setItem('remax_properties', JSON.stringify(properties));
-            resetPropForm();
-            loadData();
+            var payload = {
+                title: document.getElementById('pTitle').value,
+                category: document.getElementById('pCategory').value,
+                type: document.getElementById('pType').value,
+                price: document.getElementById('pPrice').value,
+                location: document.getElementById('pLocation').value,
+                rooms: document.getElementById('pRooms').value,
+                area: document.getElementById('pArea').value,
+                description: document.getElementById('pDescription').value
+            };
+            if (propImagesArray.length > 0) payload.images = propImagesArray;
+
+            var req = editId
+                ? authFetch('/api/listings', { method: 'PUT', body: JSON.stringify(Object.assign({ id: editId }, payload)) })
+                : authFetch('/api/listings', { method: 'POST', body: JSON.stringify(Object.assign({ images: [] }, payload)) });
+
+            req.then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+               .then(function (res) {
+                   if (!res.ok) return handleSaveError(res.body, 'pFormError');
+                   alert(editId ? 'İlan güncellendi!' : 'Yeni ilan yüklendi!');
+                   resetPropForm();
+                   loadData();
+               })
+               .catch(function () { handleSaveError(null, 'pFormError'); });
         }
 
         function editProperty(id) {
-            var properties = JSON.parse(localStorage.getItem('remax_properties')) || [];
-            var p = properties.find(function(item) { return item.id == id; });
+            var p = window._listings.find(function (item) { return item.id === id; });
             if (p) {
                 document.getElementById('pEditId').value = p.id;
                 document.getElementById('pTitle').value = p.title;
@@ -315,8 +380,9 @@
                 document.getElementById('pLocation').value = p.location;
                 document.getElementById('pRooms').value = p.rooms || '3+1';
                 document.getElementById('pArea').value = p.area || '';
-                
-                document.getElementById('propFormTitle').innerText = "İlanı Güncelle (ID: " + p.id + ")";
+                document.getElementById('pDescription').value = p.description || '';
+
+                document.getElementById('propFormTitle').innerText = "İlanı Güncelle: " + p.title;
                 document.getElementById('pBtnSubmit').innerText = "Değişiklikleri Kaydet";
                 document.getElementById('pImgLabel').innerText = "Mevcut fotoğraflar korunuyor. Değiştirmek için yeni seçin.";
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -330,52 +396,60 @@
             document.getElementById('propFormTitle').innerText = "Yeni İlan Ekle";
             document.getElementById('pBtnSubmit').innerText = "İlanı Kaydet ve Yayınla";
             document.getElementById('pImgLabel').innerText = "Fotoğraf Seçmek İçin Tıklayın";
+            showFormError('pFormError', null);
+        }
+
+        function validateAgentForm() {
+            var name = document.getElementById('aName').value.trim();
+            var title = document.getElementById('aTitle').value.trim();
+            var phone = document.getElementById('aPhone').value.replace(/[\s()-]/g, '');
+            var email = document.getElementById('aEmail').value.trim();
+            if (name.length < 3) return 'Ad soyad en az 3 karakter olmalı.';
+            if (title.length < 3) return 'Unvan / uzmanlık alanı girilmeli.';
+            if (!/^0?5\d{9}$/.test(phone)) return 'Telefon numarası geçerli bir Türkiye cep telefonu formatında olmalı (05XX XXX XX XX).';
+            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'E-posta adresi geçerli formatta değil.';
+            return null;
         }
 
         function saveAgent(e) {
             e.preventDefault();
-            var agents = JSON.parse(localStorage.getItem('remax_agents')) || [];
             var editId = document.getElementById('aEditId').value;
+            showFormError('aFormError', null);
 
-            if (editId) {
-                agents = agents.map(function(a) {
-                    if (a.id == editId) {
-                        a.name = document.getElementById('aName').value;
-                        a.title = document.getElementById('aTitle').value;
-                        a.phone = document.getElementById('aPhone').value;
-                        a.email = document.getElementById('aEmail').value;
-                        if (agentBase64) a.image = agentBase64;
-                    }
-                    return a;
-                });
-                alert('Danışman bilgileri güncellendi!');
-            } else {
-                agents.push({
-                    id: Date.now(),
-                    name: document.getElementById('aName').value,
-                    title: document.getElementById('aTitle').value,
-                    phone: document.getElementById('aPhone').value,
-                    email: document.getElementById('aEmail').value,
-                    image: agentBase64 || 'https://via.placeholder.com/200x200?text=Profil'
-                });
-                alert('Danışman eklendi!');
-            }
+            var validationError = validateAgentForm();
+            if (validationError) return showFormError('aFormError', validationError);
 
-            localStorage.setItem('remax_agents', JSON.stringify(agents));
-            resetAgentForm();
-            loadData();
+            var payload = {
+                name: document.getElementById('aName').value,
+                title: document.getElementById('aTitle').value,
+                phone: document.getElementById('aPhone').value,
+                email: document.getElementById('aEmail').value
+            };
+            if (agentBase64) payload.image = agentBase64;
+
+            var req = editId
+                ? authFetch('/api/agents', { method: 'PUT', body: JSON.stringify(Object.assign({ id: editId }, payload)) })
+                : authFetch('/api/agents', { method: 'POST', body: JSON.stringify(Object.assign({ image: '' }, payload)) });
+
+            req.then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+               .then(function (res) {
+                   if (!res.ok) return handleSaveError(res.body, 'aFormError');
+                   alert(editId ? 'Danışman bilgileri güncellendi!' : 'Danışman eklendi!');
+                   resetAgentForm();
+                   loadData();
+               })
+               .catch(function () { handleSaveError(null, 'aFormError'); });
         }
 
         function editAgent(id) {
-            var agents = JSON.parse(localStorage.getItem('remax_agents')) || [];
-            var a = agents.find(function(item) { return item.id == id; });
+            var a = window._agents.find(function (item) { return item.id === id; });
             if (a) {
                 document.getElementById('aEditId').value = a.id;
                 document.getElementById('aName').value = a.name;
                 document.getElementById('aTitle').value = a.title;
                 document.getElementById('aPhone').value = a.phone;
                 document.getElementById('aEmail').value = a.email || '';
-                
+
                 document.getElementById('agentFormTitle').innerText = "Danışmanı Güncelle: " + a.name;
                 document.getElementById('aBtnSubmit').innerText = "Güncellemeleri Kaydet";
                 document.getElementById('aImgLabel').innerText = "Mevcut fotoğraf korunuyor. Değiştirmek için yeni seçin.";
@@ -390,40 +464,79 @@
             document.getElementById('agentFormTitle').innerText = "Yeni Danışman Ekle";
             document.getElementById('aBtnSubmit').innerText = "Danışmanı Ekip Listesine Ekle";
             document.getElementById('aImgLabel').innerText = "Fotoğraf Seçmek İçin Tıklayın";
+            showFormError('aFormError', null);
         }
 
         function deleteItem(type, id) {
-            var key = type === 'prop' ? 'remax_properties' : 'remax_agents';
-            var data = JSON.parse(localStorage.getItem(key)) || [];
-            data = data.filter(function(item) { return item.id != id; });
-            localStorage.setItem(key, JSON.stringify(data));
-            loadData();
+            if (!confirm('Silmek istediğinize emin misiniz?')) return;
+            var url = (type === 'prop' ? '/api/listings' : '/api/agents') + '?id=' + encodeURIComponent(id);
+            authFetch(url, { method: 'DELETE' })
+                .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+                .then(function (res) { if (!res.ok) return handleSaveError(res.body); loadData(); })
+                .catch(function () { handleSaveError(); });
         }
 
         function loadData() {
-            var properties = JSON.parse(localStorage.getItem('remax_properties')) || [];
-            var agents = JSON.parse(localStorage.getItem('remax_agents')) || [];
+            Promise.all([
+                fetch('/api/listings').then(function (r) { return r.json(); }),
+                fetch('/api/agents').then(function (r) { return r.json(); })
+            ]).then(function (results) {
+                var listingsRes = results[0], agentsRes = results[1];
+                var kvOn = listingsRes.kvConfigured && agentsRes.kvConfigured;
+                document.getElementById('kvBanner').style.display = kvOn ? 'none' : 'block';
 
-            var propHtml = '';
-            if(properties.length > 0) {
-                properties.forEach(function(p) {
-                    var imgCount = p.images ? p.images.length : 1;
-                    propHtml += '<div class="list-row"><div style="display:flex; align-items:center;"><img src="' + p.image + '" class="img-preview"><span><strong>' + p.title + '</strong> - ' + p.price + ' (' + p.rooms + ')</span></div><div class="btn-group"><button class="btn-edit" onclick="editProperty(' + p.id + ')">Güncelle</button><button class="btn-delete" onclick="deleteItem(\'prop\', ' + p.id + ')">Sil</button></div></div>';
-                });
-            } else {
-                propHtml = '<p style="color:#94a3b8; font-size:0.9rem;">Henüz ilan eklenmedi.</p>';
-            }
-            document.getElementById('propertyList').innerHTML = propHtml;
+                window._listings = listingsRes.listings || [];
+                window._agents = agentsRes.agents || [];
 
-            var agentHtml = '';
-            if(agents.length > 0) {
-                agents.forEach(function(a) {
-                    agentHtml += '<div class="list-row"><div style="display:flex; align-items:center;"><img src="' + a.image + '" class="img-preview" style="border-radius:6px;"><span><strong>' + a.name + '</strong> - ' + a.title + '</span></div><div class="btn-group"><button class="btn-edit" onclick="editAgent(' + a.id + ')">Güncelle</button><button class="btn-delete" onclick="deleteItem(\'agent\', ' + a.id + ')">Sil</button></div></div>';
+                var propHtml = '';
+                if (window._listings.length > 0) {
+                    window._listings.forEach(function (p) {
+                        var img = (p.images && p.images[0]) || '';
+                        propHtml += '<div class="list-row"><div style="display:flex; align-items:center;">' +
+                            (img ? '<img src="' + img + '" class="img-preview">' : '<div class="img-preview"></div>') +
+                            '<span><strong>' + p.title + '</strong> - ' + p.price + ' (' + p.rooms + ')</span></div>' +
+                            '<div class="btn-group"><button class="btn-edit" onclick="editProperty(\'' + p.id + '\')">Güncelle</button>' +
+                            '<button class="btn-delete" onclick="deleteItem(\'prop\', \'' + p.id + '\')">Sil</button></div></div>';
+                    });
+                } else {
+                    propHtml = '<p style="color:#94a3b8; font-size:0.9rem;">Henüz ilan eklenmedi.</p>';
+                }
+                document.getElementById('propertyList').innerHTML = propHtml;
+
+                var agentHtml = '';
+                if (window._agents.length > 0) {
+                    window._agents.forEach(function (a) {
+                        agentHtml += '<div class="list-row"><div style="display:flex; align-items:center;">' +
+                            (a.image ? '<img src="' + a.image + '" class="img-preview" style="border-radius:6px;">' : '<div class="img-preview" style="border-radius:6px;"></div>') +
+                            '<span><strong>' + a.name + '</strong> - ' + a.title + '</span></div>' +
+                            '<div class="btn-group"><button class="btn-edit" onclick="editAgent(\'' + a.id + '\')">Güncelle</button>' +
+                            '<button class="btn-delete" onclick="deleteItem(\'agent\', \'' + a.id + '\')">Sil</button></div></div>';
+                    });
+                } else {
+                    agentHtml = '<p style="color:#94a3b8; font-size:0.9rem;">Henüz danışman eklenmedi.</p>';
+                }
+                document.getElementById('agentList').innerHTML = agentHtml;
+            });
+        }
+
+        function loadMessages() {
+            authFetch('/api/contact').then(function (r) { return r.json(); }).then(function (j) {
+                var messages = j.messages || [];
+                if (!messages.length) {
+                    document.getElementById('messageList').innerHTML = '<p style="color:#94a3b8; font-size:0.9rem;">Henüz mesaj yok.</p>';
+                    return;
+                }
+                var html = '';
+                messages.forEach(function (m) {
+                    html += '<div class="msg-row"><span class="msg-tag">' + m.formType + '</span><strong>' + m.name + '</strong> · ' + m.phone +
+                        (m.email ? ' · ' + m.email : '') +
+                        (m.message ? '<div>' + m.message + '</div>' : '') +
+                        '<div class="meta">' + new Date(m.createdAt).toLocaleString('tr-TR') + '</div></div>';
                 });
-            } else {
-                agentHtml = '<p style="color:#94a3b8; font-size:0.9rem;">Henüz danışman eklenmedi.</p>';
-            }
-            document.getElementById('agentList').innerHTML = agentHtml;
+                document.getElementById('messageList').innerHTML = html;
+            }).catch(function () {
+                document.getElementById('messageList').innerHTML = '<p style="color:#94a3b8; font-size:0.9rem;">Mesajlar yüklenemedi.</p>';
+            });
         }
     </script>
 </body>
